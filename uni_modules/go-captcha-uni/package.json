@@ -16,7 +16,7 @@
     "行为验证码组件",
     "验证码组件",
     "前端验证码组件"
-  ],
+],
   "bugs": {
     "url": "https://github.com/wenlng/go-captcha-uni/issues"
   },
