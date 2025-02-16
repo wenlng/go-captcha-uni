@@ -1,0 +1,97 @@
+{
+  "id": "go-captcha-uni",
+  "displayName": "go-captcha-uni",
+  "version": "1.0.1",
+  "description": "UniApp 行为验证码组件，拼图滑块验证码，拼图拖放验证码，图像旋转验证码，点击验证码",
+  "private": false,
+  "type": "module",
+  "main": "components/go-captcha-uni/go-captcha-uni.vue",
+  "email": "wengaolng@gmail.com",
+  "author": "Awen <wengaolng@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "go-captcha",
+    "go-captcha-uni",
+    "行为验证码组件",
+    "验证码组件",
+    "前端验证码组件"
+  ],
+  "bugs": {
+    "url": "https://github.com/wenlng/go-captcha-uni/issues"
+  },
+  "repository": "https://github.com/wenlng/go-captcha-uni.git",
+  "engines": {
+    "HBuilderX": "^3.91"
+  },
+  "dcloudext": {
+    "type": "component-vue",
+    "sale": {
+      "regular": {
+        "price": "0.00"
+      },
+      "sourcecode": {
+        "price": "0.00"
+      }
+    },
+    "contact": {
+      "qq": "871024608"
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "无"
+    },
+    "npmurl": "https://www.npmjs.com/package/go-captcha-uni"
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "y",
+        "aliyun": "y",
+        "alipay": "y"
+      },
+      "client": {
+        "Vue": {
+          "vue2": "n",
+          "vue3": "y"
+        },
+        "App": {
+            "app-vue": "y",
+            "app-nvue": "y",
+            "app-harmony": "u",
+            "app-uvue": "u"
+        },
+        "H5-mobile": {
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
+        },
+        "H5-pc": {
+          "Chrome": "y",
+          "IE": "y",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
+        },
+        "小程序": {
+          "微信": "u",
+          "阿里": "u",
+          "百度": "u",
+          "字节跳动": "u",
+          "QQ": "u",
+          "钉钉": "u",
+          "快手": "u",
+          "飞书": "u",
+          "京东": "u"
+        },
+        "快应用": {
+          "华为": "u",
+          "联盟": "u"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,497 @@
+.go-captcha.gc-wrapper {
+    position: relative;
+    padding: 12px 16px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    box-sizing: border-box
+}
+
+.go-captcha.gc-theme {
+    border: 1px solid rgba(206, 223, 254, .5);
+/*//border-color: var(--go-captcha-theme-border-color);*/
+    border-color: rgba(206, 223, 254, 0.5);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #6464641a;
+    -webkit-box-shadow: 0 0 20px rgba(100, 100, 100, .1);
+    -moz-box-shadow: 0 0 20px rgba(100, 100, 100, .1)
+}
+
+.go-captcha.gc-theme.gc-wrapper {
+    /*//background-color: var(--go-captcha-theme-bg-color);*/
+    background-color: #ffffff;
+}
+
+.go-captcha .gc-header {
+    height: 36px;
+    width: 100%;
+    font-size: 15px;
+/*//color: var(--go-captcha-theme-text-color);*/
+    color: #333333;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.go-captcha .gc-header .gc-text {
+    flex: 1;
+    padding-right: 5px
+}
+
+.go-captcha .gc-header .gc-text-em {
+    padding: 0 3px;
+    font-weight: 700;
+    color: #3e7cff;
+    font-style: normal
+}
+
+.go-captcha .gc-body {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    background: #34383e;
+/*//background: var(--go-captcha-theme-body-bg-color);*/
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    overflow: hidden
+}
+
+.go-captcha .gc-body .gc-body-inner {
+    position: relative;
+    background: #34383e;
+    /*//background: var(--go-captcha-theme-body-bg-color);*/
+}
+
+.go-captcha .gc-picture {
+    position: relative;
+    z-index: 2;
+    width: 100%
+}
+
+.go-captcha .gc-hide {
+    visibility: hidden
+}
+
+.go-captcha .gc-loading {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+    line-height: 16px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center
+}
+
+.go-captcha .gc-loading .gc-loading-icon {
+    width: 16px;
+    height: 16px;
+    background: #3e7cff;
+    border-radius: 100%;
+    animation: gc-loading 1.3s infinite;
+    -moz-animation: gc-loading 1.3s infinite;
+    -webkit-animation: gc-loading 1.3s infinite;
+    animation-delay: 2s;
+    -moz-animation-delay: 2s;
+    -webkit-animation-delay: 2s
+}
+
+.go-captcha .gc-loading svg, .go-captcha .gc-loading circle {
+/*//color: var(--go-captcha-theme-loading-icon-color);*/
+/*//fill: var(--go-captcha-theme-loading-icon-color);*/
+    color: #3e7cff;
+    fill: #3e7cff;
+}
+
+.go-captcha .gc-footer {
+    width: 100%;
+    height: 50px;
+    color: #34383e;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.go-captcha .gc-footer .gc-icon-block {
+    flex: 1;
+}
+
+.go-captcha .gc-icon-block {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center
+}
+
+.go-captcha .gc-icon-block svg {
+    color: #3C3C3C;
+    fill: #3C3C3C;
+/*//color: var(--go-captcha-theme-icon-color);*/
+/*//fill: var(--go-captcha-theme-icon-color);*/
+    margin: 0 5px;
+    cursor: pointer
+}
+
+.go-captcha .gc-icon-block .gc-icon {
+    color: #3C3C3C;
+    font-size: 24px;
+    margin: 0 5px;
+    cursor: pointer;
+    position: relative;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center
+}
+
+.go-captcha .gc-icon-block img {
+    margin: 0 5px;
+    cursor: pointer
+}
+
+.go-captcha .gc-button-block {
+    width: 120px;
+    height: 40px
+}
+
+.go-captcha .gc-button-block .gc-button {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    padding: 9px 15px;
+    font-size: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    /*display: inline-block;*/
+    /*line-height: 1;*/
+    white-space: nowrap;
+    cursor: pointer;
+/*// color: var(--go-captcha-theme-btn-color);*/
+    color: #ffffff;
+/*// background-color: var(--go-captcha-theme-btn-bg-color);*/
+    background-color: #4e87ff;
+    border: 1px solid transparent;
+/*//border-color: var(--go-captcha-theme-btn-bg-color);*/
+    border-color: #4e87ff;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center
+}
+
+.go-captcha .gc-button-block .gc-button::after{
+    border: none !important;
+}
+
+.go-captcha .gc-button-block .gc-button.disabled {
+    pointer-events: none;
+/*//background-color: var(--go-captcha-theme-btn-disabled-color);*/
+/*//border-color: var(--go-captcha-theme-btn-disabled-color);*/
+    background-color: #749ff9;
+    border-color: #749ff9;
+}
+
+.go-captcha .gc-drag-slide-bar {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    touch-action: none
+}
+
+.go-captcha .gc-drag-line {
+    position: absolute;
+    height: 14px;
+    background-color: #e0e0e0;
+/*//background-color: var(--go-captcha-theme-drag-bar-color);*/
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px
+}
+
+.go-captcha .gc-drag-block {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -20px;
+    width: 82px;
+    height: 40px;
+    z-index: 2;
+    background-color: #3e7cff;
+/*//background-color: var(--go-captcha-theme-drag-bg-color);*/
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    border-radius: 24px;
+    box-shadow: 0 0 20px #64646459;
+    -webkit-box-shadow: 0 0 20px rgba(100, 100, 100, .35);
+    -moz-box-shadow: 0 0 20px rgba(100, 100, 100, .35);
+    color: #ffffff;
+    fill: #ffffff;
+/*//color: var(--go-captcha-theme-drag-icon-color);*/
+/*//fill: var(--go-captcha-theme-drag-icon-color);*/
+}
+
+.go-captcha .gc-drag-block img {
+    height: 22px
+}
+
+.go-captcha .gc-drag-block.disabled {
+    pointer-events: none;
+/*//background-color: var(--go-captcha-theme-btn-disabled-color);*/
+/*//border-color: var(--go-captcha-theme-btn-disabled-color);*/
+    border-color: #749ff9;
+    background-color: #749ff9;
+}
+
+.go-captcha .gc-drag-block-inline {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.go-captcha.gc-click-mode .gc-icon-block {
+    flex: 1
+}
+
+.go-captcha.gc-click-mode .gc-picture {
+    cursor: pointer
+}
+
+.go-captcha.gc-click-mode .gc-dots {
+    position: absolute;
+    inset: 0
+}
+
+.go-captcha.gc-click-mode .gc-dot {
+    position: absolute;
+    z-index: 2;
+    width: 22px;
+    height: 22px;
+    color: #cedffe;
+    background: #3e7cff;
+    border: 3px solid #f7f9fb;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    cursor: default
+}
+
+.go-captcha.gc-slide-mode .gc-center {
+    text-align: center
+}
+
+.go-captcha.gc-slide-mode .gc-tile {
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.go-captcha.gc-slide-mode .gc-tile img {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 100%
+}
+
+.go-captcha.gc-rotate-mode .gc-body {
+    background: transparent !important;
+    display: flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 0
+}
+
+.go-captcha.gc-rotate-mode .gc-body-inner {
+    border-radius: 100%
+}
+
+.go-captcha.gc-rotate-mode .gc-picture {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 2;
+    border-radius: 100%;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.go-captcha.gc-rotate-mode .gc-picture img {
+    max-width: 100%;
+    max-height: 100%
+}
+
+.go-captcha.gc-rotate-mode .gc-picture .gc-img {
+    max-width: 100%;
+    max-height: 100%
+}
+
+.go-captcha.gc-rotate-mode .gc-round {
+    position: absolute;
+    inset: 0;
+    border-radius: 100%;
+    z-index: 2;
+    border: 6px solid #e0e0e0;
+    border-color: #e0e0e0;
+/*//border-color: var(--go-captcha-theme-round-color)*/
+}
+
+.go-captcha.gc-rotate-mode .gc-thumb {
+    position: absolute;
+    z-index: 2;
+    inset: 0
+}
+
+.go-captcha.gc-rotate-mode .gc-thumb img {
+    max-width: 100%;
+    max-height: 100%
+}
+
+.go-captcha.gc-rotate-mode .gc-thumb .gc-img {
+    max-width: 100%;
+    max-height: 100%
+}
+
+.go-captcha.gc-rotate-mode .gc-thumb-block, .go-captcha.gc-rotate-mode .gc-rotate-thumb-block {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+
+@keyframes gc-loading {
+    0% {
+        margin-top: 0;
+    }
+    25% {
+        margin-top: -25px;
+    }
+    50% {
+        margin-top: 0px;
+    }
+    75% {
+        margin-top: 25px;
+    }
+    to {
+        margin-top: 0px;
+    }
+}
+
+@-webkit-keyframes gc-loading {
+    0% {
+        margin-top: 0;
+    }
+    25% {
+        margin-top: -25px;
+    }
+    50% {
+        margin-top: 0px;
+    }
+    75% {
+        margin-top: 25px;
+    }
+    to {
+        margin-top: 0px;
+    }
+}

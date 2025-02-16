@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('./fonts/icomoon.eot');
+  src:  url('./fonts/icomoon.eot#iefix') format('embedded-opentype'),
+    url('./fonts/icomoon.ttf') format('truetype'),
+    url('./fonts/icomoon.woff') format('woff'),
+    url('./fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrows-icon:before {
+  content: "\e900";
+}
+.icon-btn-default-icon .path1:before {
+  content: "\e901";
+  color: rgb(62, 124, 255);
+}
+.icon-btn-default-icon .path2:before {
+  content: "\e902";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-btn-error-icon:before {
+  content: "\e903";
+  color: #ed4630;
+}
+.icon-btn-success-icon:before {
+  content: "\e904";
+  color: #5eaa2f;
+}
+.icon-btn-warn-icon:before {
+  content: "\e905";
+  color: #ffa000;
+}
+.icon-close-icon:before {
+  content: "\e906";
+}
+.icon-refresh-icon:before {
+  content: "\e907";
+}

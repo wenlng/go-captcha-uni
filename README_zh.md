@@ -1,28 +1,29 @@
+
 <div align="center">
 <img width="120" style="padding-top: 50px; margin: 0;" src="http://47.104.180.148/go-captcha/gocaptcha_logo.svg?v=1"/>
 <h1 style="margin: 0; padding: 0">Go Captcha</h1>
-<p>The Behavior Captcha For The UniApp</p>
-
+<p>UniApp 行为验证码</p>
 </div>
 
 <br/>
 
-> English | [中文](README_zh.md)
+> [English](README.md) | 中文
 
 <br/>
 
-<p style="text-align: center">  ⭐️ If it helps you, please give a star.</p>
+<p style="text-align: center"> ⭐️ 如果能帮助到你，请随手给点一个star</p>
+<p style="text-align: center">QQ交流群：178498936</p>
 
 <img src="http://47.104.180.148/go-captcha/go-captcha-v2.jpg" alt="Poster">
 
 <br/>
 
 - GoCaptcha：[https://github.com/wenlng/go-captcha](https://github.com/wenlng/go-captcha)
-- GoCaptcha Document：[http://gocaptcha.wencodes.com](http://gocaptcha.wencodes.com)
-- Go Assets File：[https://github.com/wenlng/go-captcha-assets](https://github.com/wenlng/go-captcha-assets)
-- Example Project：[https://github.com/wenlng/go-captcha-example](https://github.com/wenlng/go-captcha-example)
-- Online Demo：[http://gocaptcha.wencodes.com/demo](http://gocaptcha.wencodes.com/demo)
-- Javascript Library：[https://github.com/wenlng/go-captcha-jslib](https://github.com/wenlng/go-captcha-jslib)
+- GoCaptcha 文档：[http://gocaptcha.wencodes.com](http://gocaptcha.wencodes.com)
+- Golang 内嵌素材资源：[https://github.com/wenlng/go-captcha-assets](https://github.com/wenlng/go-captcha-assets)
+- Golang/前端的实例：[https://github.com/wenlng/go-captcha-example](https://github.com/wenlng/go-captcha-example)
+- 在线演示 URL：[http://gocaptcha.wencodes.com/demo/](http://gocaptcha.wencodes.com/demo/)
+- Javascript 原生库：[https://github.com/wenlng/go-captcha-jslib](https://github.com/wenlng/go-captcha-jslib)
 - Vue Package：[https://github.com/wenlng/go-captcha-vue](https://github.com/wenlng/go-captcha-vue)
 - React Package：[https://github.com/wenlng/go-captcha-react](https://github.com/wenlng/go-captcha-react)
 - Angular Package：[https://github.com/wenlng/go-captcha-angular](https://github.com/wenlng/go-captcha-angular)
@@ -30,6 +31,7 @@
 - Solid Package：[https://github.com/wenlng/go-captcha-solid](https://github.com/wenlng/go-captcha-solid)
 - UniApp Module：[https://github.com/wenlng/go-captcha-uni](https://github.com/wenlng/go-captcha-uni)
 - ...
+
 
 <br/>
 
@@ -40,14 +42,14 @@
 | HBuilderX >= 3.0             | vue >= 3.0             | go-captcha-uni@^1  |
 
 
-## Install
-#### 1、Use HBuilderX Import
+## 安装方式
+#### 1、使用HBuilderX导入插件
 * [使用HBuilderX导入插件](https://ext.dcloud.net.cn/plugin?name=go-captcha-uni)
 
-#### 2、Download ZIP Import
+#### 2、下载插件ZIP导入插件
 * [下载插件ZIP](https://ext.dcloud.net.cn/plugin?name=go-captcha-uni)
 
-#### 3、Dependency Tool Install
+#### 3、Node 依赖工具安装
 ```shell
 yarn add go-captcha-uni@^1
 # or
@@ -55,8 +57,12 @@ npm install go-captcha-uni@^1
 # or
 pnpm install go-captcha-uni@^1
 ```
+下载成功后在【node_modules】目录显示
 
-## Use Component
+## 使用
+### uni_modules 方式导入
+注：该方式支持 easycom 导入组件模式，可不用引用、注册，支持直接在页面中使用。
+
 ```vue
 <go-captcha-uni  type="click"
                  :data="clickCaptData"
@@ -66,7 +72,7 @@ pnpm install go-captcha-uni@^1
 ```
 
 
-## Click Mode
+## 点选式
 ```vue
 <go-captcha-uni
   type="click"  
@@ -144,7 +150,7 @@ interface ExportMethods {
 }
 ```
 
-## Slide Mode
+## 滑动式
 ```vue
 <go-captcha-uni
     type="slide"
@@ -219,7 +225,7 @@ interface ExportMethods {
 }
 ```
 
-## Drag-Drop Mode
+## 拖拽式
 ```vue
 <go-captcha-uni
     type="drag"
@@ -291,7 +297,7 @@ interface ExportMethods {
 }
 ```
 
-## Rotation Mode
+## 旋转式
 ```vue
 <go-captcha-uni
     type="rotate"
@@ -365,7 +371,7 @@ interface ExportMethods {
 ```
 
 
-## Button
+## 按钮
 ```vue
 <go-captcha-uni
     type="button"
@@ -417,3 +423,9 @@ interface Events {
 }
 
 ```
+
+## 👍 赞助一下
+<div>
+<a href="http://gocaptcha.wencodes.com/sponsor/" target="_blank">http://gocaptcha.wencodes.com/sponsor/</a>
+</div>
+<br/>
