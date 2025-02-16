@@ -57,18 +57,33 @@ npm install go-captcha-uni@^1
 # or
 pnpm install go-captcha-uni@^1
 ```
-下载成功后在【node_modules】目录显示
 
 ## 使用
-### uni_modules 方式导入
-注：该方式支持 easycom 导入组件模式，可不用引用、注册，支持直接在页面中使用。
+* 采用 uni_modules 方式安装，支持 easycom 模式导入组件，可以不用 Import、注册等。
 
 ```vue
-<go-captcha-uni  type="click"
-                 :data="clickCaptData"
-                 :events="clickCaptEvents"
-                 :config="clickCaptConfig"
-                 :theme="clickThemeColor" />
+<template>
+  <go-captcha-uni  type="click"
+                   :data="clickCaptData"
+                   :events="clickCaptEvents"
+                   :config="clickCaptConfig"
+                   :theme="clickThemeColor" />
+</template>
+```
+
+* 采用 npm/yarn/pnpm/... 等依赖工具方式安装，需要 Import 导入。
+```vue
+<template>
+  <go-captcha-uni  type="click"
+                   :data="clickCaptData"
+                   :events="clickCaptEvents"
+                   :config="clickCaptConfig"
+                   :theme="clickThemeColor" />
+</template>
+
+<script>
+import GoCaptchaUni from 'go-captcha-uni'
+</script>
 ```
 
 
