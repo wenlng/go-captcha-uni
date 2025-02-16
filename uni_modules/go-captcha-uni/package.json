@@ -1,5 +1,6 @@
 {
   "id": "go-captcha-uni",
+  "name": "go-captcha-uni",
   "displayName": "go-captcha-uni",
   "version": "1.0.1",
   "description": "UniApp 行为验证码组件，拼图滑块验证码，拼图拖放验证码，图像旋转验证码，点击验证码",
