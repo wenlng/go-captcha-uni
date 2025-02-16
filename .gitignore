@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
 .hbuilderx
+unpackage
 .vite
 # unpackage/
 # dist/
