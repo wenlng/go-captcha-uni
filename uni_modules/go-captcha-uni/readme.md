@@ -72,6 +72,7 @@ pnpm install go-captcha-uni
 ```
 
 * 采用 npm/yarn/pnpm/... 等依赖工具方式安装，需要 Import 导入。
+
 ```vue
 <template>
   <go-captcha-uni  type="click"
@@ -88,6 +89,7 @@ import GoCaptchaUni from 'go-captcha-uni'
 
 
 ## 点选式
+
 ```vue
 <go-captcha-uni
   type="click"  
@@ -166,6 +168,7 @@ interface ExportMethods {
 ```
 
 ## 滑动式
+
 ```vue
 <go-captcha-uni
     type="slide"
@@ -241,6 +244,7 @@ interface ExportMethods {
 ```
 
 ## 拖拽式
+
 ```vue
 <go-captcha-uni
     type="drag"
@@ -313,6 +317,7 @@ interface ExportMethods {
 ```
 
 ## 旋转式
+
 ```vue
 <go-captcha-uni
     type="rotate"
@@ -387,6 +392,7 @@ interface ExportMethods {
 
 
 ## 按钮
+
 ```vue
 <go-captcha-uni
     type="button"
@@ -440,6 +446,7 @@ interface Events {
 ```
 
 ## 👍 赞助一下
+
 <div>
 <a href="http://gocaptcha.wencodes.com/sponsor/" target="_blank">http://gocaptcha.wencodes.com/sponsor/</a>
 </div>
