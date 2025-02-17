@@ -24,9 +24,6 @@ import drag from '../drag/index.vue'
 import rotate from '../rotate/index.vue'
 import btn from '../button/index.vue'
 
-import '../../assets/icons/style.css'
-import '../../assets/css/gocaptcha.css'
-
 const clickRef = ref(null)
 const slideRef = ref(null)
 const dragRef = ref(null)

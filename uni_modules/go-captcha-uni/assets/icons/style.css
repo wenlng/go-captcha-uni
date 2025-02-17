@@ -10,7 +10,15 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+.icon-arrows-icon,
+.icon-btn-default-icon,
+.icon-btn-default-icon,
+.icon-btn-error-icon,
+.icon-btn-success-icon,
+.icon-btn-warn-icon,
+.icon-close-icon,
+.icon-refresh-icon
+{
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: never;

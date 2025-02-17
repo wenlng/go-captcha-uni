@@ -60,9 +60,9 @@
           :class="!hasDisplayImageState && 'disabled'"
           :id="`gc-slide-drag-block-${ukey}`"
           :style="{left: handler.state.dragLeft + 'px'}"
-          @touchstart="handler.dragStart"
+          @touchstart.stop.prevent="handler.dragStart"
           @touchend="handler.dragEnd"
-          @mousedown="handler.mouseDown"
+          @mousedown.stop.prevent="handler.mouseDown"
           @mouseup="handler.mouseUp"
         >
           <view
@@ -76,10 +76,11 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, reactive, toRaw, watch} from "vue"
+import {computed, getCurrentInstance, reactive, toRaw, watch} from "vue"
 import {defaultConfig, defaultSlideData, defaultThemeColors} from "./meta/default";
 import {useHandler} from "./hooks/handler";
 
+const app = getCurrentInstance()
 const props = defineProps({
   config: {
     default: () => defaultConfig()
@@ -124,6 +125,7 @@ const handler = useHandler(
     localEvent,
     localConfig,
     ukey,
+    app,
     () => {
       localData.thumb = ''
       localData.image = ''
@@ -185,6 +187,9 @@ defineExpose({
 </script>
 
 <style>
+@import '../../assets/icons/style.css';
+@import '../../assets/css/gocaptcha.css';
+
 .go-captcha .gc-tile {
   position: absolute;
   z-index: 2;

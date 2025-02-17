@@ -72,14 +72,12 @@
 	  </view>
 </template>
 <script setup>
-import { ref } from 'vue'
-const title = ref('Hello')
-
-import {computed, reactive, toRaw, watch} from "vue"
+import {computed, getCurrentInstance, reactive, toRaw, watch} from "vue"
 import {defaultConfig, defaultThemeColors} from "./meta/default";
 
 import {useHandler} from "./hooks/handler";
 
+const app = getCurrentInstance()
 const props = defineProps({
 	config: {
 		default: () => defaultConfig()
@@ -119,7 +117,7 @@ watch(() => props.theme, (newData, _) => {
   Object.assign(localTheme, newData)
 },{ deep: true })
 
-const handler = useHandler(localData, localEvent, ukey, () => {
+const handler = useHandler(localData, localEvent, ukey, app, () => {
   localData.thumb = ''
   localData.image = ''
 });
@@ -170,6 +168,9 @@ defineExpose({
 </script>
 
 <style>
+@import '../../assets/icons/style.css';
+@import '../../assets/css/gocaptcha.css';
+
 .go-captcha .gc-body {
   position: relative;
 }

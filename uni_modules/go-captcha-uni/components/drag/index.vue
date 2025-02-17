@@ -14,8 +14,8 @@
       class="gc-body"
       :id="`gc-drag-container-${ukey}`"
       :style="{...imageStyles, backgroundColor: localTheme.bodyBgColor}"
-      @touchmove="handler.dragMove"
-      @mousemove="handler.mouseMove"
+      @touchmove.stop.prevent="handler.dragMove"
+      @mousemove.stop.prevent="handler.mouseMove"
     >
       <view class="gc-loading">
         <view class="gc-loading-icon" :style="{backgroundColor: localTheme.loadingIconColor}"/>
@@ -36,11 +36,11 @@
           class="gc-img"
           v-show="hasDisplayThumbImageState"
           :src="localData.thumb"
-          @dragstart="()=> {return false;}"
+          @dragstart.stop.prevent="(e)=> {e.preventDefault();return false;}"
           @touchstart.stop.prevent="handler.dragStart"
           @touchend="handler.dragEnd"
           @mousedown.stop.prevent="handler.mouseDown"
-          @mouseup="handler.mouseUp"
+          @mouseup.stop.prevent="handler.mouseUp"
           @mouseleave="handler.mouseLeave"
           alt=""
         />
@@ -64,10 +64,11 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, reactive, toRaw, watch} from "vue"
+import {computed, getCurrentInstance, reactive, toRaw, watch} from "vue"
 import {defaultConfig, defaultDragData, defaultThemeColors} from "./meta/default";
 import {useHandler} from "./hooks/handler";
 
+const app = getCurrentInstance()
 const props = defineProps({
   config: {
     default: () => defaultConfig()
@@ -112,6 +113,7 @@ const handler = useHandler(
     localEvent,
     localConfig,
     ukey,
+    app,
     () => {
       localData.thumb = ''
       localData.image = ''
@@ -173,6 +175,9 @@ defineExpose({
 </script>
 
 <style>
+@import '../../assets/icons/style.css';
+@import '../../assets/css/gocaptcha.css';
+
 .go-captcha .gc-header2 {
   text-align: center;
 }

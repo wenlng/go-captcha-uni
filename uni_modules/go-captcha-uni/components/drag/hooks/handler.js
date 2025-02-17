@@ -1,10 +1,12 @@
 import {reactive, watch} from "vue";
+import {getXY} from "../../../helper/helper.js";
 
 export function useHandler(
   data,
   event,
   config,
   ukey,
+  app,
   clearCbs
 ) {
   const state = reactive({x: data.thumbX || 0, y: data.thumbY || 0, isFreeze: false})
@@ -19,6 +21,9 @@ export function useHandler(
     maxHeight: 0,
   })
 
+  const systemInfo = uni.getSystemInfoSync();
+  const isPcBrowser = systemInfo.model && systemInfo.model.toUpperCase() === 'PC'
+
   watch(() => data, (newData, _) => {
     if(!state.isFreeze){
       state.x = newData.thumbX || 0
@@ -26,14 +31,15 @@ export function useHandler(
     }
   },{ deep: true })
 
-  const dragStart = (e) => {
-    const clientX = e.touches[0].clientX || e.touches[0].pageX ||0;
-    const clientY = e.touches[0].clientY || e.touches[0].pageY ||0;
+  const handleStart = (e) => {
+    const xy = getXY(e)
+    const clientX = xy.x
+    const clientY = xy.y
 
     try{
-      const query = uni.createSelectorQuery().in(this);
+      const query = uni.createSelectorQuery().in(app);
       query.select(`#gc-drag-container-${ukey}`).boundingClientRect(cdata => {
-        const query1 = uni.createSelectorQuery().in(this);
+        const query1 = uni.createSelectorQuery().in(app);
         query1.select(`#gc-drag-tile-${ukey}`).boundingClientRect(tdata => {
           handleDragStart(clientX, clientY, cdata, tdata)
         }).exec();
@@ -44,6 +50,8 @@ export function useHandler(
 
     state.isFreeze = true
     caches.isStarting = true
+    e.preventDefault()
+    e.stopPropagation()
   }
 
   const handleDragStart = (clientX, clientY, cdata, tdata) => {
@@ -61,13 +69,14 @@ export function useHandler(
     caches.startY = clientY - offsetTop
   }
 
-  const dragMove = (e) => {
+  const handleMove = (e) => {
     if (!caches.isStarting) {
       return
     }
     caches.isMoving = true
-    const clientX = e.touches[0].clientX || e.touches[0].pageX ||0;
-    const clientY = e.touches[0].clientY || e.touches[0].pageY ||0;
+    const xy = getXY(e)
+    const clientX = xy.x
+    const clientY = xy.y
 
     let left = clientX - caches.startX
     let top = clientY - caches.startY
@@ -96,10 +105,11 @@ export function useHandler(
 
     e.cancelBubble = true
     e.preventDefault()
+    e.stopPropagation()
     return false
   }
 
-  const dragEnd = (e) => {
+  const handleEnd = (e) => {
     caches.isStarting = false
 
     if (!caches.isMoving) {
@@ -119,21 +129,47 @@ export function useHandler(
 
     e.cancelBubble = true
     e.preventDefault()
+    e.stopPropagation()
+  }
+
+  const dragStart = (e) => {
+    if (isPcBrowser) return
+    handleStart(e)
+    return false
+  }
+
+  const dragMove = (e) => {
+    if (isPcBrowser) return
+    handleMove(e)
+    return false
+  }
+
+  const dragEnd = (e) => {
+    if (isPcBrowser) return
+    handleEnd(e)
+    return false
   }
 
   const mouseDown = (e) => {
-    dragStart(e)
+    if (!isPcBrowser) return
+    handleStart(e)
+    return false
   }
   const mouseMove = (e) => {
-    dragMove(e)
+    if (!isPcBrowser) return
+    handleMove(e)
+    return false
   }
 
   const mouseUp = (e) => {
-    dragEnd(e)
+    if (!isPcBrowser) return
+    handleEnd(e)
+    return false
   }
 
   const mouseLeave = (e) => {
-    dragEnd(e)
+    if (!isPcBrowser) return
+    handleEnd(e)
   }
 
   const closeEvent = (e) => {

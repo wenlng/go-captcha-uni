@@ -12,8 +12,6 @@
 
 .go-captcha.gc-theme {
     border: 1px solid rgba(206, 223, 254, .5);
-/*//border-color: var(--go-captcha-theme-border-color);*/
-    border-color: rgba(206, 223, 254, 0.5);
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
@@ -23,7 +21,6 @@
 }
 
 .go-captcha.gc-theme.gc-wrapper {
-    /*//background-color: var(--go-captcha-theme-bg-color);*/
     background-color: #ffffff;
 }
 
@@ -31,7 +28,6 @@
     height: 36px;
     width: 100%;
     font-size: 15px;
-/*//color: var(--go-captcha-theme-text-color);*/
     color: #333333;
     display: -webkit-box;
     display: -webkit-flex;
@@ -70,7 +66,6 @@
     display: -webkit-flex;
     display: flex;
     background: #34383e;
-/*//background: var(--go-captcha-theme-body-bg-color);*/
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -80,7 +75,6 @@
 .go-captcha .gc-body .gc-body-inner {
     position: relative;
     background: #34383e;
-    /*//background: var(--go-captcha-theme-body-bg-color);*/
 }
 
 .go-captcha .gc-picture {
@@ -123,8 +117,6 @@
 }
 
 .go-captcha .gc-loading svg, .go-captcha .gc-loading circle {
-/*//color: var(--go-captcha-theme-loading-icon-color);*/
-/*//fill: var(--go-captcha-theme-loading-icon-color);*/
     color: #3e7cff;
     fill: #3e7cff;
 }
@@ -163,8 +155,6 @@
 .go-captcha .gc-icon-block svg {
     color: #3C3C3C;
     fill: #3C3C3C;
-/*//color: var(--go-captcha-theme-icon-color);*/
-/*//fill: var(--go-captcha-theme-icon-color);*/
     margin: 0 5px;
     cursor: pointer
 }
@@ -207,17 +197,11 @@
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    /*display: inline-block;*/
-    /*line-height: 1;*/
     white-space: nowrap;
     cursor: pointer;
-/*// color: var(--go-captcha-theme-btn-color);*/
     color: #ffffff;
-/*// background-color: var(--go-captcha-theme-btn-bg-color);*/
     background-color: #4e87ff;
-    border: 1px solid transparent;
-/*//border-color: var(--go-captcha-theme-btn-bg-color);*/
-    border-color: #4e87ff;
+    border: 1px solid #4e87ff;
     -webkit-appearance: none;
     box-sizing: border-box;
     outline: none;
@@ -245,8 +229,6 @@
 
 .go-captcha .gc-button-block .gc-button.disabled {
     pointer-events: none;
-/*//background-color: var(--go-captcha-theme-btn-disabled-color);*/
-/*//border-color: var(--go-captcha-theme-btn-disabled-color);*/
     background-color: #749ff9;
     border-color: #749ff9;
 }
@@ -262,7 +244,6 @@
     position: absolute;
     height: 14px;
     background-color: #e0e0e0;
-/*//background-color: var(--go-captcha-theme-drag-bar-color);*/
     left: 0;
     right: 0;
     top: 50%;
@@ -281,7 +262,6 @@
     height: 40px;
     z-index: 2;
     background-color: #3e7cff;
-/*//background-color: var(--go-captcha-theme-drag-bg-color);*/
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -299,8 +279,6 @@
     -moz-box-shadow: 0 0 20px rgba(100, 100, 100, .35);
     color: #ffffff;
     fill: #ffffff;
-/*//color: var(--go-captcha-theme-drag-icon-color);*/
-/*//fill: var(--go-captcha-theme-drag-icon-color);*/
 }
 
 .go-captcha .gc-drag-block img {
@@ -309,8 +287,6 @@
 
 .go-captcha .gc-drag-block.disabled {
     pointer-events: none;
-/*//background-color: var(--go-captcha-theme-btn-disabled-color);*/
-/*//border-color: var(--go-captcha-theme-btn-disabled-color);*/
     border-color: #749ff9;
     background-color: #749ff9;
 }
@@ -322,143 +298,6 @@
     align-items: center;
     justify-content: center
 }
-
-.go-captcha.gc-click-mode .gc-icon-block {
-    flex: 1
-}
-
-.go-captcha.gc-click-mode .gc-picture {
-    cursor: pointer
-}
-
-.go-captcha.gc-click-mode .gc-dots {
-    position: absolute;
-    inset: 0
-}
-
-.go-captcha.gc-click-mode .gc-dot {
-    position: absolute;
-    z-index: 2;
-    width: 22px;
-    height: 22px;
-    color: #cedffe;
-    background: #3e7cff;
-    border: 3px solid #f7f9fb;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    cursor: default
-}
-
-.go-captcha.gc-slide-mode .gc-center {
-    text-align: center
-}
-
-.go-captcha.gc-slide-mode .gc-tile {
-    position: absolute;
-    z-index: 2;
-    cursor: pointer;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none
-}
-
-.go-captcha.gc-slide-mode .gc-tile img {
-    display: block;
-    cursor: pointer;
-    width: 100%;
-    height: 100%
-}
-
-.go-captcha.gc-rotate-mode .gc-body {
-    background: transparent !important;
-    display: flex;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px auto 0
-}
-
-.go-captcha.gc-rotate-mode .gc-body-inner {
-    border-radius: 100%
-}
-
-.go-captcha.gc-rotate-mode .gc-picture {
-    position: relative;
-    max-width: 100%;
-    max-height: 100%;
-    z-index: 2;
-    border-radius: 100%;
-    overflow: hidden;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
-
-.go-captcha.gc-rotate-mode .gc-picture img {
-    max-width: 100%;
-    max-height: 100%
-}
-
-.go-captcha.gc-rotate-mode .gc-picture .gc-img {
-    max-width: 100%;
-    max-height: 100%
-}
-
-.go-captcha.gc-rotate-mode .gc-round {
-    position: absolute;
-    inset: 0;
-    border-radius: 100%;
-    z-index: 2;
-    border: 6px solid #e0e0e0;
-    border-color: #e0e0e0;
-/*//border-color: var(--go-captcha-theme-round-color)*/
-}
-
-.go-captcha.gc-rotate-mode .gc-thumb {
-    position: absolute;
-    z-index: 2;
-    inset: 0
-}
-
-.go-captcha.gc-rotate-mode .gc-thumb img {
-    max-width: 100%;
-    max-height: 100%
-}
-
-.go-captcha.gc-rotate-mode .gc-thumb .gc-img {
-    max-width: 100%;
-    max-height: 100%
-}
-
-.go-captcha.gc-rotate-mode .gc-thumb-block, .go-captcha.gc-rotate-mode .gc-rotate-thumb-block {
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
-
 
 @keyframes gc-loading {
     0% {

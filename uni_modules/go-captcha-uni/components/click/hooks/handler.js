@@ -1,14 +1,16 @@
 import {reactive, toRaw} from "vue";
+import {getXY} from "../../../helper/helper.js";
 
-export function useHandler(_, event, ukey, clearCbs) {
+export function useHandler(_, event, ukey, app, clearCbs) {
   const dots = reactive({list: []})
 
   const clickEvent = (e) => {
-    const mouseX = e.touches[0].clientX || e.touches[0].pageX ||0;
-    const mouseY =  e.touches[0].clientY || e.touches[0].pageY ||0;
+    const xy = getXY(e)
+    const mouseX = xy.x
+    const mouseY = xy.y
 
     try{
-      const query = uni.createSelectorQuery().in(this);
+      const query = uni.createSelectorQuery().in(app);
       query.select(`#gc-click-picture-${ukey}`).boundingClientRect(data => {
         handleEvent(mouseX, mouseY, data.left || 0, data.top || 0)
       }).exec();

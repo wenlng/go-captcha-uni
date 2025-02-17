@@ -2,8 +2,8 @@
   "id": "go-captcha-uni",
   "name": "go-captcha-uni",
   "displayName": "go-captcha-uni",
-  "version": "1.0.1",
-  "description": "UniApp 行为验证码组件，拼图滑块验证码，拼图拖放验证码，图像旋转验证码，点击验证码",
+  "version": "1.0.2-beta",
+  "description": "UniApp 验证码组件，GoCaptcha 验证码，行为验证码组件，拼图滑块验证码，拼图拖放验证码，图像旋转验证码，点击验证码",
   "private": false,
   "type": "module",
   "main": "components/go-captcha-uni/go-captcha-uni.vue",
@@ -49,9 +49,9 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "y",
-        "aliyun": "y",
-        "alipay": "y"
+        "tcb": "u",
+        "aliyun": "u",
+        "alipay": "u"
       },
       "client": {
         "Vue": {
@@ -78,19 +78,19 @@
           "Safari": "y"
         },
         "小程序": {
-          "微信": "u",
-          "阿里": "u",
-          "百度": "u",
-          "字节跳动": "u",
-          "QQ": "u",
-          "钉钉": "u",
-          "快手": "u",
-          "飞书": "u",
-          "京东": "u"
+          "微信": "y",
+          "阿里": "y",
+          "百度": "y",
+          "字节跳动": "y",
+          "QQ": "y",
+          "钉钉": "y",
+          "快手": "y",
+          "飞书": "y",
+          "京东": "y"
         },
         "快应用": {
-          "华为": "u",
-          "联盟": "u"
+          "华为": "y",
+          "联盟": "y"
         }
       }
     }

@@ -2,7 +2,7 @@
   <button
     :class="btnClass"
     :style="btnStyle"
-    @click="localEvent.click"
+    @click="handleClickEvent"
   >
     <view :class="localData.type === 'default' ? 'gc-ripple' : ''">
       <view class="gc-icon gc-btn-icon icon-btn-default-icon" v-if="localData.type === 'default'" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
@@ -27,7 +27,7 @@ const props = defineProps({
     default: () => defaultConfig()
   },
   events: {
-    default: () => ({click: () => {}})
+    default: () => ({})
   },
   data: {
     default: () => defaultButtonData()
@@ -69,7 +69,7 @@ const btnClass = computed(() => {
 const defaultBtnStyle = computed(() => {
   return {
     color: localTheme.defaultColor,
-    backgroundColor: isHovered ? localTheme.defaultHoverColor : localTheme.defaultBgColor,
+    backgroundColor: isHovered.value ? localTheme.defaultHoverColor : localTheme.defaultBgColor,
     borderColor: localTheme.defaultBorderColor,
   }
 })
@@ -120,15 +120,21 @@ const btnStyle = computed(() => {
 })
 
 const handleMouseEnter = () => {
-  this.isHovered = true
+  isHovered.value = true
 }
 const handleMouseLeave = () => {
-  this.isHovered = false
+  isHovered.value = false
+}
+
+const handleClickEvent = () => {
+  localEvent.click && localEvent.click()
 }
 
 </script>
 
 <style>
+@import '../../assets/icons/style.css';
+
 .go-captcha.gc-btn-block {
   position: relative;
   box-sizing: border-box;

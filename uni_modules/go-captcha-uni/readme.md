@@ -51,11 +51,11 @@
 
 #### 3、Node 依赖工具安装
 ```shell
-yarn add go-captcha-uni@^1
+yarn add go-captcha-uni
 # or
-npm install go-captcha-uni@^1
+npm install go-captcha-uni
 # or
-pnpm install go-captcha-uni@^1
+pnpm install go-captcha-uni
 ```
 
 ## 使用
@@ -262,7 +262,7 @@ domRef.value.refresh()
 
 ```ts
 // config = {}
-interface SlideRegionConfig {
+interface DragConfig {
   width?: number;
   height?: number;
   thumbWidth?: number;
@@ -286,7 +286,7 @@ interface Theme {
 }
 
 // data = {}
-interface SlideRegionData {
+interface DragData {
   thumbX: number;
   thumbY: number;
   thumbWidth: number;
@@ -296,7 +296,7 @@ interface SlideRegionData {
 }
 
 // events = {}
-interface SlideRegionEvents {
+interface DragEvents {
   move?: (x: number, y: number) => void;
   refresh?: () => void;
   close?: () => void;

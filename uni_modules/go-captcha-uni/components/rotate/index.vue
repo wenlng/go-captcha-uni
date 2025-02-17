@@ -82,10 +82,11 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, reactive, toRaw, watch} from "vue"
+import {computed, getCurrentInstance, reactive, toRaw, watch} from "vue"
 import {defaultConfig, defaultThemeColors, defaultRotateData} from "./meta/default";
 import {useHandler} from "./hooks/handler";
 
+const app = getCurrentInstance()
 const props = defineProps({
   config: {
     default: () => defaultConfig()
@@ -130,6 +131,7 @@ const handler = useHandler(
     localEvent,
     localConfig,
     ukey,
+    app,
     () => {
       localData.thumb = ''
       localData.image = ''
@@ -201,6 +203,9 @@ defineExpose({
 </script>
 
 <style>
+@import '../../assets/icons/style.css';
+@import '../../assets/css/gocaptcha.css';
+
 .go-captcha .gc-rotate-body {
   background: transparent !important;
   display: flex;

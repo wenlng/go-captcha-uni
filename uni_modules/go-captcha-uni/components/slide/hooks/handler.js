@@ -1,10 +1,12 @@
 import {reactive, watch} from "vue";
+import {getXY} from "../../../helper/helper.js";
 
 export function useHandler(
   data,
   event,
   config,
   ukey,
+  app,
   clearCbs
 ) {
   const state = reactive({dragLeft: 0, thumbLeft: data.thumbX || 0, isFreeze: false})
@@ -18,6 +20,8 @@ export function useHandler(
     tileOffsetLeft: 0,
     ratio: 0,
   })
+  const systemInfo = uni.getSystemInfoSync();
+  const isPcBrowser = systemInfo.model && systemInfo.model.toUpperCase() === 'PC'
 
   watch(() => data, (newData, _) => {
     if(!state.isFreeze){
@@ -25,30 +29,12 @@ export function useHandler(
     }
   },{ deep: true })
 
-  const dragStart = (e) => {
-    const clientX = e.touches[0].clientX || e.touches[0].pageX ||0;
-
-    try{
-      const query = uni.createSelectorQuery().in(this);
-      query.select(`#gc-slide-container-${ukey}`).boundingClientRect(cdata => {
-        const query1 = uni.createSelectorQuery().in(this);
-        query1.select(`#gc-slide-tile-${ukey}`).boundingClientRect(tdata => {
-          handleDragStart(clientX, cdata, tdata)
-        }).exec();
-      }).exec();
-    } catch (e) {
-      console.warn(`gocaptcha boundingClientRect err`, e)
-    }
-
-    state.isFreeze = true
-    caches.isStarting = true
-  }
 
   const handleDragStart = (clientX, cdata, tdata) => {
     try{
-      const query = uni.createSelectorQuery().in(this);
+      const query = uni.createSelectorQuery().in(app);
       query.select(`#gc-slide-drag-bar-${ukey}`).boundingClientRect(dbdata => {
-        const query1 = uni.createSelectorQuery().in(this);
+        const query1 = uni.createSelectorQuery().in(app);
         query1.select(`#gc-slide-drag-block-${ukey}`).boundingClientRect(bddata => {
           const offsetLeft = bddata.left - dbdata.left
           const blockWidth = bddata.width
@@ -68,12 +54,35 @@ export function useHandler(
     }
   }
 
-  const dragMove = (e) => {
+  const handleStart = (e) => {
+    const xy = getXY(e)
+    const clientX = xy.x
+
+    try{
+      const query = uni.createSelectorQuery().in(app);
+      query.select(`#gc-slide-container-${ukey}`).boundingClientRect(cdata => {
+        const query1 = uni.createSelectorQuery().in(app);
+        query1.select(`#gc-slide-tile-${ukey}`).boundingClientRect(tdata => {
+          handleDragStart(clientX, cdata, tdata)
+        }).exec();
+      }).exec();
+    } catch (e) {
+      console.warn(`gocaptcha boundingClientRect err`, e)
+    }
+
+    state.isFreeze = true
+    caches.isStarting = true
+  }
+
+  const handleMove = (e) => {
+
     if (!caches.isStarting) {
       return
     }
     caches.isMoving = true
-    const clientX = e.touches[0].clientX || e.touches[0].pageX ||0;
+
+    const xy = getXY(e)
+    const clientX = xy.x
 
     let left = clientX - caches.startX
     let ctX = caches.tileOffsetLeft + (left * caches.ratio)
@@ -98,7 +107,8 @@ export function useHandler(
     e.preventDefault()
   }
 
-  const dragEnd = (e) => {
+  const handleEnd = (e) => {
+
     caches.isStarting = false
 
     if (!caches.isMoving) {
@@ -120,19 +130,44 @@ export function useHandler(
     e.preventDefault()
   }
 
+  const dragStart = (e) => {
+    if (isPcBrowser) return
+    handleStart(e)
+    return false
+  }
+
+  const dragMove = (e) => {
+    if (isPcBrowser) return
+    handleMove(e)
+    return false
+  }
+
+  const dragEnd = (e) => {
+    if (isPcBrowser) return
+    handleEnd(e)
+    return false
+  }
+
   const mouseDown = (e) => {
-    dragStart(e)
+    if (!isPcBrowser) return
+    handleStart(e)
+    return false
   }
   const mouseMove = (e) => {
-    dragMove(e)
+    if (!isPcBrowser) return
+    handleMove(e)
+    return false
   }
 
   const mouseUp = (e) => {
-    dragEnd(e)
+    if (!isPcBrowser) return
+    handleEnd(e)
+    return false
   }
 
   const mouseLeave = (e) => {
-    dragEnd(e)
+    if (!isPcBrowser) return
+    handleEnd(e)
   }
 
   const closeEvent = (e) => {

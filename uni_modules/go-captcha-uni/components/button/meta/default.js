@@ -13,7 +13,7 @@ export const defaultButtonData = () => ({
 
 export const defaultThemeColors = () => ({
   defaultColor: '#3e7cff',
-  defaultBgColor: '#3e7cff',
+  defaultBgColor: '#ecf5ff',
   defaultBorderColor: '#50a1ff',
   defaultHoverColor: '#e0efff',
 

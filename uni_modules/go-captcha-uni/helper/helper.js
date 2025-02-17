@@ -14,3 +14,25 @@ export const getDomPosition = (id, cabs) => {
     console.warn(`gocaptcha boundingClientRect err`, e)
   }
 }
+
+export const getXY = (e) => {
+  let xy = {x: 0, y: 0}
+  try {
+    if (e.touches && Array.isArray(e.touches) && e.touches.length > 0) {
+      xy.x = e.touches[0].clientX || e.touches[0].pageX || 0;
+      xy.y =  e.touches[0].clientY || e.touches[0].pageY || 0;
+    } else if (e.detail){
+      xy.x = e.detail.clientX || e.detail.pageX || 0;
+      xy.y =  e.detail.clientY || e.detail.pageY || 0;
+    }  else if (e.target) {
+      xy.x = e.target.x || 0;
+      xy.y =  e.target.y || 0;
+    }else {
+      xy.x = e.pageX || e.clientX || 0;
+      xy.y = e.pageY || e.clientY || 0;
+    }
+    return xy
+  } catch (e) {
+    console.warn('>>>>>>>> go captcha err: ', e)
+  }
+}
