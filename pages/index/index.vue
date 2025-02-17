@@ -36,7 +36,7 @@
     <go-captcha-uni
         type="button"
         :data="{type: 'default', disabled: false}"
-        :events="{click: () => console.log('hello')}"
+        :events="{click: handleClick}"
         :config="{title: '这是测试触发的按钮'}"
     />
     <view class="space" />
@@ -257,6 +257,10 @@ nextTick(() => {
 })
 
 //////////////////////////////////
+
+const handleClick = () => {
+  console.log('------hello')
+}
 
 onReady(() => {
   console.log('onReady')

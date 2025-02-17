@@ -42,18 +42,18 @@
 
 ## Install
 #### 1、Use HBuilderX Import
-* [使用HBuilderX导入插件](https://ext.dcloud.net.cn/plugin?name=go-captcha-uni)
+* [Use HBuilderX Import](https://ext.dcloud.net.cn/plugin?name=go-captcha-uni)
 
 #### 2、Download ZIP Import
-* [下载插件ZIP](https://ext.dcloud.net.cn/plugin?name=go-captcha-uni)
+* [Download ZIP File](https://ext.dcloud.net.cn/plugin?name=go-captcha-uni)
 
 #### 3、Dependency Tool Install
 ```shell
-yarn add go-captcha-uni@^1
+yarn add go-captcha-uni
 # or
-npm install go-captcha-uni@^1
+npm install go-captcha-uni
 # or
-pnpm install go-captcha-uni@^1
+pnpm install go-captcha-uni
 ```
 
 ## Use Component
@@ -241,7 +241,7 @@ domRef.value.refresh()
 
 ```ts
 // config = {}
-interface SlideRegionConfig {
+interface DragConfig {
   width?: number;
   height?: number;
   thumbWidth?: number;
@@ -265,7 +265,7 @@ interface Theme {
 }
 
 // data = {}
-interface SlideRegionData {
+interface DragData {
   thumbX: number;
   thumbY: number;
   thumbWidth: number;
@@ -275,7 +275,7 @@ interface SlideRegionData {
 }
 
 // events = {}
-interface SlideRegionEvents {
+interface DragEvents {
   move?: (x: number, y: number) => void;
   refresh?: () => void;
   close?: () => void;
