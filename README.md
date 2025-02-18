@@ -1,7 +1,7 @@
 <div align="center">
 <img width="120" style="padding-top: 50px; margin: 0;" src="http://47.104.180.148/go-captcha/gocaptcha_logo.svg?v=1"/>
 <h1 style="margin: 0; padding: 0">Go Captcha</h1>
-<p>The Behavior Captcha For The UniApp</p>
+<p>Behavior Captcha Of UniApp</p>
 
 </div>
 
@@ -57,6 +57,7 @@ pnpm install go-captcha-uni
 ```
 
 ## Use Component
+
 ```vue
 <go-captcha-uni  type="click"
                  :data="clickCaptData"
@@ -67,6 +68,7 @@ pnpm install go-captcha-uni
 
 
 ## Click Mode
+
 ```vue
 <go-captcha-uni
   type="click"  
@@ -145,6 +147,7 @@ interface ExportMethods {
 ```
 
 ## Slide Mode
+
 ```vue
 <go-captcha-uni
     type="slide"
@@ -220,6 +223,7 @@ interface ExportMethods {
 ```
 
 ## Drag-Drop Mode
+
 ```vue
 <go-captcha-uni
     type="drag"
@@ -292,6 +296,7 @@ interface ExportMethods {
 ```
 
 ## Rotation Mode
+
 ```vue
 <go-captcha-uni
     type="rotate"
@@ -366,6 +371,7 @@ interface ExportMethods {
 
 
 ## Button
+
 ```vue
 <go-captcha-uni
     type="button"
