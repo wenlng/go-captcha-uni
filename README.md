@@ -1,7 +1,13 @@
 <div align="center">
-<img width="120" style="padding-top: 50px; margin: 0;" src="http://47.104.180.148/go-captcha/gocaptcha_logo.svg?v=1"/>
+<img width="120" style="padding-top: 50px; margin: 0;" src="https://github.com/wenlng/git-assets/blob/master/go-captcha/gocaptcha_logo.svg?raw=true"/>
 <h1 style="margin: 0; padding: 0">Go Captcha</h1>
 <p>Behavior Captcha Of UniApp</p>
+
+<a href="https://github.com/wenlng/go-captcha-uni/releases"><img src="https://img.shields.io/github/v/release/wenlng/go-captcha-uni.svg"/></a>
+<a href="https://www.npmjs.com/package/go-captcha-uni"><img src="https://img.shields.io/npm/v/go-captcha-uni"/></a>
+<a href="https://github.com/wenlng/go-captcha-uni/blob/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg"/></a>
+<a href="https://github.com/wenlng/go-captcha-uni"><img src="https://img.shields.io/github/stars/wenlng/go-captcha-uni.svg"/></a>
+<a href="https://github.com/wenlng/go-captcha-uni"><img src="https://img.shields.io/github/last-commit/wenlng/go-captcha-uni.svg"/></a>
 
 </div>
 
@@ -13,31 +19,34 @@
 
 <p style="text-align: center">  ⭐️ If it helps you, please give a star.</p>
 
-<img src="http://47.104.180.148/go-captcha/go-captcha-v2.jpg" alt="Poster">
+<img src="https://github.com/wenlng/git-assets/blob/master/go-captcha/go-captcha-v2.jpg?raw=true" alt="Poster">
 
 <br/>
 
-- GoCaptcha：[https://github.com/wenlng/go-captcha](https://github.com/wenlng/go-captcha)
-- GoCaptcha Document：[http://gocaptcha.wencodes.com](http://gocaptcha.wencodes.com)
-- Go Assets File：[https://github.com/wenlng/go-captcha-assets](https://github.com/wenlng/go-captcha-assets)
-- Example Project：[https://github.com/wenlng/go-captcha-example](https://github.com/wenlng/go-captcha-example)
-- Online Demo：[http://gocaptcha.wencodes.com/demo](http://gocaptcha.wencodes.com/demo)
-- Javascript Library：[https://github.com/wenlng/go-captcha-jslib](https://github.com/wenlng/go-captcha-jslib)
-- Vue Package：[https://github.com/wenlng/go-captcha-vue](https://github.com/wenlng/go-captcha-vue)
-- React Package：[https://github.com/wenlng/go-captcha-react](https://github.com/wenlng/go-captcha-react)
-- Angular Package：[https://github.com/wenlng/go-captcha-angular](https://github.com/wenlng/go-captcha-angular)
-- Svelte Package：[https://github.com/wenlng/go-captcha-svelte](https://github.com/wenlng/go-captcha-svelte)
-- Solid Package：[https://github.com/wenlng/go-captcha-solid](https://github.com/wenlng/go-captcha-solid)
-- UniApp Module：[https://github.com/wenlng/go-captcha-uni](https://github.com/wenlng/go-captcha-uni)
-- ...
+<hr/>
+<br/>
+
+## URL Index
+
+| Name                                                               | Desc                       |
+|--------------------------------------------------------------------|----------------------------|
+| [document](http://gocaptcha.wencodes.com)                          | GoCaptcha Document         |
+| [online demo](http://gocaptcha.wencodes.com/demo/)                 | GoCaptcha Online Demo      |
+| [go-captcha-example](https://github.com/wenlng/go-captcha-example) | Golang + Web + APP Example |
+| [go-captcha-assets](https://github.com/wenlng/go-captcha-assets)   | Golang Asset File          |
+| [go-captcha](https://github.com/wenlng/go-captcha)                 | Golang Captcha             |
+| [go-captcha-jslib](https://github.com/wenlng/go-captcha-jslib)     | Javascript Captcha         |
+| [go-captcha-vue](https://github.com/wenlng/go-captcha-vue)         | Vue Captcha                |
+| [go-captcha-react](https://github.com/wenlng/go-captcha-react)     | React Captcha              |
+| [go-captcha-angular](https://github.com/wenlng/go-captcha-angular) | Angular Captcha            |
+| [go-captcha-svelte](https://github.com/wenlng/go-captcha-svelte)   | Svelte Captcha             |
+| [go-captcha-solid](https://github.com/wenlng/go-captcha-solid)     | Solid Captcha              |
+| [go-captcha-uni](https://github.com/wenlng/go-captcha-uni)         | UniApp Captcha             |
+| ...                                                                |                            |
+
 
 <br/>
 
-
-
-| HBuilderX Version            | Vue Version            | Go Captcha Version |
-|:-----------------------|:-----------------------|:------------------:|
-| HBuilderX >= 3.0             | vue >= 3.0             | go-captcha-uni@^1  |
 
 
 ## Install
@@ -104,6 +113,20 @@ interface Config {
   dotSize?: number;
 }
 
+// data = {}
+interface Data {
+  image: string;
+  thumb: string;
+}
+
+// events = {}
+interface Events {
+  click?: (x: number, y: number) => void;
+  refresh?: () => void;
+  close?: () => void;
+  confirm?: (dots: Array<ClickDot>, reset:() => void) => boolean;
+}
+
 // theme = {}
 interface Theme {
   textColor?: string; // '#ffffff'
@@ -121,20 +144,6 @@ interface Theme {
   dotColor?: string;
   dotBgColor?: string;
   dotBorderColor?: string;
-}
-
-// data = {}
-interface Data {
-  image: string;
-  thumb: string;
-}
-
-// events = {}
-interface Events {
-  click?: (x: number, y: number) => void;
-  refresh?: () => void;
-  close?: () => void;
-  confirm?: (dots: Array<ClickDot>, reset:() => void) => boolean;
 }
 
 // export component method
@@ -169,7 +178,7 @@ domRef.value.refresh()
 
 ```ts
 // config = {}
-interface SlideConfig {
+interface Config {
   width?: number;
   height?: number;
   thumbWidth?: number;
@@ -180,6 +189,24 @@ interface SlideConfig {
   title?: string;
   iconSize?: number;
   scope ?: boolean;
+}
+
+// data = {}
+interface Data {
+  thumbX: number;
+  thumbY: number;
+  thumbWidth: number;
+  thumbHeight: number;
+  image: string;
+  thumb: string;
+}
+
+// events = {}
+interface Events {
+  move?: (x: number, y: number) => void;
+  refresh?: () => void;
+  close?: () => void;
+  confirm?: (point: SlidePoint, reset:() => void) => boolean;
 }
 
 // theme = {}
@@ -193,24 +220,6 @@ interface Theme {
   dragIconColor?: string;
   loadingIconColor?: string;
   bodyBgColor?: string;
-}
-
-// data = {}
-interface SlideData {
-  thumbX: number;
-  thumbY: number;
-  thumbWidth: number;
-  thumbHeight: number;
-  image: string;
-  thumb: string;
-}
-
-// events = {}
-interface SlideEvents {
-  move?: (x: number, y: number) => void;
-  refresh?: () => void;
-  close?: () => void;
-  confirm?: (point: SlidePoint, reset:() => void) => boolean;
 }
 
 // export component method
@@ -245,7 +254,7 @@ domRef.value.refresh()
 
 ```ts
 // config = {}
-interface DragConfig {
+interface Config {
   width?: number;
   height?: number;
   thumbWidth?: number;
@@ -258,18 +267,8 @@ interface DragConfig {
   scope ?: boolean;
 }
 
-// theme = {}
-interface Theme {
-  textColor?: string; // '#ffffff'
-  bgColor?: string;
-  borderColor?: string;
-  iconColor?: string;
-  loadingIconColor?: string;
-  bodyBgColor?: string;
-}
-
 // data = {}
-interface DragData {
+interface Data {
   thumbX: number;
   thumbY: number;
   thumbWidth: number;
@@ -279,11 +278,21 @@ interface DragData {
 }
 
 // events = {}
-interface DragEvents {
+interface Events {
   move?: (x: number, y: number) => void;
   refresh?: () => void;
   close?: () => void;
   confirm?: (point: SlideRegionPoint, reset:() => void) => boolean;
+}
+
+// theme = {}
+interface Theme {
+  textColor?: string; // '#ffffff'
+  bgColor?: string;
+  borderColor?: string;
+  iconColor?: string;
+  loadingIconColor?: string;
+  bodyBgColor?: string;
 }
 
 // export component method
@@ -331,20 +340,6 @@ interface Config {
   scope ?: boolean;
 }
 
-// theme = {}
-interface Theme {
-  textColor?: string; // '#ffffff'
-  bgColor?: string;
-  borderColor?: string;
-  iconColor?: string;
-  dragBarColor?: string;
-  dragBgColor?: string;
-  dragIconColor?: string;
-  roundColor?: string;
-  loadingIconColor?: string;
-  bodyBgColor?: string;
-}
-
 // data = {}
 interface Data {
   angle: number;
@@ -358,6 +353,20 @@ interface Events {
   refresh?: () => void;
   close?: () => void;
   confirm?: (angle: number, reset:() => void) => boolean;
+}
+
+// theme = {}
+interface Theme {
+  textColor?: string; // '#ffffff'
+  bgColor?: string;
+  borderColor?: string;
+  iconColor?: string;
+  dragBarColor?: string;
+  dragBgColor?: string;
+  dragIconColor?: string;
+  roundColor?: string;
+  loadingIconColor?: string;
+  bodyBgColor?: string;
 }
 
 // export component method
@@ -392,6 +401,12 @@ interface Config {
   horizontalPadding?: number;
 }
 
+// data = {}
+interface Data {
+  disabled?: boolean;
+  type?: "default" | "warn" | "error" | "success"
+}
+
 // theme = {}
 interface Theme {
   textColor?: string; // '#ffffff'
@@ -409,12 +424,6 @@ interface Theme {
   dotColor?: string;
   dotBgColor?: string;
   dotBorderColor?: string;
-}
-
-// data = {}
-interface Data {
-  disabled?: boolean;
-  type?: "default" | "warn" | "error" | "success"
 }
 
 // events = {}

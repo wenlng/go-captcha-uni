@@ -81,7 +81,7 @@
   </view>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import {computed, getCurrentInstance, reactive, toRaw, watch} from "vue"
 import {defaultConfig, defaultThemeColors, defaultRotateData} from "./meta/default";
 import {useHandler} from "./hooks/handler";
@@ -239,8 +239,8 @@ defineExpose({
 }
 
 .go-captcha .gc-rotate-picture .gc-img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .go-captcha .gc-rotate-picture .gc-round {
@@ -272,8 +272,8 @@ defineExpose({
 }
 
 .go-captcha .gc-rotate-thumb .gc-img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
