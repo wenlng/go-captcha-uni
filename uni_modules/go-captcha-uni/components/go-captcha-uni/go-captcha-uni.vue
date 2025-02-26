@@ -1,3 +1,4 @@
+// #ifdef VUE3
 <template>
   <template v-if="props.type.toLocaleString() === 'click'">
     <click ref="clickRef" :config="props.config" :events="props.events" :data="props.data" :theme="props.theme"></click>
@@ -16,7 +17,6 @@
   </template>
 </template>
 
-// #ifdef VUE3
 <script setup>
 import { ref } from 'vue'
 
@@ -84,6 +84,18 @@ defineExpose({
 
 
 // #ifndef VUE3
+<template>
+  <click v-if="type.toLocaleString() === 'click'" ref="clickRef" :config="config" :events="events" :data="data"></click>
+
+  <slide v-else-if="type.toLocaleString() === 'slide'" ref="slideRef" :config="config" :events="events" :data="data"></slide>
+
+  <drag v-else-if="type.toLocaleString() === 'drag'" ref="dragRef" :config="config" :events="events" :data="data"></drag>
+
+  <rotate v-else-if="type.toLocaleString() === 'rotate'" ref="rotateRef" :config="config" :events="events" :data="data"></rotate>
+
+  <btn v-else-if="type.toLocaleString() === 'button'" ref="buttonRef" :config="config" :events="events" :data="data"></btn>
+</template>
+
 <script>
 import click from '../../vue2/components/click'
 import slide from '../../vue2/components/slide'
@@ -151,7 +163,6 @@ export default {
 
 </script>
 // #endif
-
 
 <style>
 </style>
