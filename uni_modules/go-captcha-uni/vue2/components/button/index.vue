@@ -20,125 +20,134 @@
   </button>
 </template>
 
-<script setup>
-import {computed, reactive, ref, toRaw, watch} from "vue"
-import {defaultConfig, defaultButtonData, defaultThemeColors} from "./meta/default";
+<script>
+import {defaultConfig, defaultButtonData, defaultThemeColors} from "../../../components/button/meta/default";
 
-const props = defineProps({
-  config: {
-    default: () => defaultConfig()
+import '../../../assets/icons/style.css';
+
+export default {
+  name: 'go-captcha-uni-button',
+  props: {
+    config: {
+      default: () => defaultConfig()
+    },
+    events: {
+      default: () => ({})
+    },
+    data: {
+      default: () => defaultButtonData()
+    },
+    theme: {
+      default: () => defaultThemeColors()
+    },
   },
-  events: {
-    default: () => ({})
+  data() {
+    return {
+      localData: {...defaultButtonData(), ...this.data},
+      localEvent: {...this.events},
+      localConfig: {...defaultConfig(), ...this.config},
+      localTheme: {...defaultThemeColors(), ...this.theme},
+
+      isHovered: false,
+    }
   },
-  data: {
-    default: () => defaultButtonData()
+  watch: {
+    data:{
+      handler(newData, oldVal){
+        Object.assign(this.localData, newData)
+      },
+      deep: true
+    },
+    events:{
+      handler(newData, oldVal){
+        Object.assign(this.localEvent, newData)
+      },
+      deep: true
+    },
+    config:{
+      handler(newData, oldVal){
+        Object.assign(this.localConfig, newData)
+      },
+      deep: true
+    },
+    theme:{
+      handler(newData, oldVal){
+        Object.assign(this.localTheme, newData)
+      },
+      deep: true
+    },
   },
-  theme: {
-    default: () => defaultThemeColors()
+  computed: {
+    btnClass(){
+      const tc = `gc-${this.localData.type}`
+      return ["go-captcha", "gc-btn-block", tc, this.localData.disabled ? "gc-disabled" : ""]
+    },
+    defaultBtnStyle(){
+      return {
+        color: this.localTheme.defaultColor,
+        backgroundColor: this.isHovered ? this.localTheme.defaultHoverColor : this.localTheme.defaultBgColor,
+        borderColor: this.localTheme.defaultBorderColor,
+      }
+    },
+    errorBtnStyle(){
+      return {
+        color: this.localTheme.errorColor,
+        backgroundColor: this.localTheme.errorBgColor,
+        borderColor: this.localTheme.errorBorderColor,
+      }
+    },
+    warnBtnStyle(){
+      return {
+        color: this.localTheme.warnColor,
+        backgroundColor: this.localTheme.warnBgColor,
+        borderColor: this.localTheme.warnBorderColor,
+      }
+    },
+    successBtnStyle(){
+      return {
+        color: this.localTheme.successColor,
+        backgroundColor: this.localTheme.successBgColor,
+        borderColor: this.localTheme.successBorderColor,
+      }
+    },
+    btnStyle(){
+      let btnColorStyle = this.defaultBtnStyle
+      if (this.localData.type === 'warn') {
+        btnColorStyle = this.warnBtnStyle
+      } else if (this.localData.type === 'error') {
+        btnColorStyle = this.errorBtnStyle
+      } else if (this.localData.type === 'success') {
+        btnColorStyle = this.successBtnStyle
+      }
+
+      return {
+        width:  this.localConfig.width + "px",
+        height: this.localConfig.height + "px",
+        paddingLeft: this.localConfig.horizontalPadding + "px",
+        paddingRight: this.localConfig.horizontalPadding + "px",
+        paddingTop: this.localConfig.verticalPadding + "px",
+        paddingBottom: this.localConfig.verticalPadding + "px",
+        ...btnColorStyle
+      }
+    }
   },
-})
-
-const { data, events, config, theme} = props;
-const localData = reactive({...defaultButtonData(), ...toRaw(data)})
-const localEvent = reactive({...toRaw(events)})
-const localConfig = reactive({...defaultConfig(), ...toRaw(config)})
-const localTheme = reactive({...defaultThemeColors(), ...toRaw(theme)})
-
-const isHovered = ref(false)
-
-watch(() => props.config, (newData, _) => {
-  Object.assign(localConfig, newData)
-},{ deep: true })
-
-watch(() => props.events, (newData, _) => {
-  Object.assign(localEvent, newData)
-},{ deep: true })
-
-watch(() => props.data, (newData, _) => {
-  Object.assign(localData, newData)
-},{ deep: true })
-
-watch(() => props.theme, (newData, _) => {
-  Object.assign(localTheme, newData)
-},{ deep: true })
-
-const btnClass = computed(() => {
-  const tc = `gc-${localData.type}`
-  return ["go-captcha", "gc-btn-block", tc, localData.disabled ? "gc-disabled" : ""]
-})
-
-const defaultBtnStyle = computed(() => {
-  return {
-    color: localTheme.defaultColor,
-    backgroundColor: isHovered.value ? localTheme.defaultHoverColor : localTheme.defaultBgColor,
-    borderColor: localTheme.defaultBorderColor,
+  methods: {
+    handleMouseEnter() {
+      if (this.localData.type !== 'default') return
+      this.isHovered = true
+    },
+    handleMouseLeave() {
+      if (this.localData.type !== 'default') return
+      this.isHovered = false
+    },
+    handleClickEvent(){
+      this.localEvent.click && this.localEvent.click()
+    }
   }
-})
-
-const errorBtnStyle = computed(() => {
-  return {
-    color: localTheme.errorColor,
-    backgroundColor: localTheme.errorBgColor,
-    borderColor: localTheme.errorBorderColor,
-  }
-})
-
-const warnBtnStyle = computed(() => {
-  return {
-    color: localTheme.warnColor,
-    backgroundColor: localTheme.warnBgColor,
-    borderColor: localTheme.warnBorderColor,
-  }
-})
-
-const successBtnStyle = computed(() => {
-  return {
-    color: localTheme.successColor,
-    backgroundColor: localTheme.successBgColor,
-    borderColor: localTheme.successBorderColor,
-  }
-})
-
-const btnStyle = computed(() => {
-  let btnColorStyle = defaultBtnStyle.value
-  if (localData.type === 'warn') {
-    btnColorStyle = warnBtnStyle.value
-  } else if (localData.type === 'error') {
-    btnColorStyle = errorBtnStyle.value
-  } else if (localData.type === 'success') {
-    btnColorStyle = successBtnStyle.value
-  }
-
-  return {
-    width:  localConfig.width + "px",
-    height: localConfig.height + "px",
-    paddingLeft: localConfig.horizontalPadding + "px",
-    paddingRight: localConfig.horizontalPadding + "px",
-    paddingTop: localConfig.verticalPadding + "px",
-    paddingBottom: localConfig.verticalPadding + "px",
-    ...btnColorStyle
-  }
-})
-
-const handleMouseEnter = () => {
-  if (localData.type !== 'default') return
-  isHovered.value = true
 }
-const handleMouseLeave = () => {
-  if (localData.type !== 'default') return
-  isHovered.value = false
-}
-
-const handleClickEvent = () => {
-  localEvent.click && localEvent.click()
-}
-
 </script>
 
 <style>
-@import '../../assets/icons/style.css';
-
 .go-captcha.gc-btn-block {
   position: relative;
   box-sizing: border-box;

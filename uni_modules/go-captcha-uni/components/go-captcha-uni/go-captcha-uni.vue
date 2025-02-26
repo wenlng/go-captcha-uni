@@ -15,6 +15,8 @@
     <btn ref="buttonRef" :config="props.config" :events="props.events" :data="props.data" :theme="props.theme"></btn>
   </template>
 </template>
+
+// #ifdef VUE3
 <script setup>
 import { ref } from 'vue'
 
@@ -78,6 +80,78 @@ defineExpose({
   close: makeCbsFnWithName('close'),
 });
 </script>
+// #endif
+
+
+// #ifndef VUE3
+<script>
+import click from '../../vue2/components/click'
+import slide from '../../vue2/components/slide'
+import drag from '../../vue2/components/drag'
+import rotate from '../../vue2/components/rotate'
+import btn from '../../vue2/components/button'
+
+export default {
+  name: 'go-captcha-uni',
+  props: {
+    type:{
+      default: 'click',
+      validator: (value) => {
+        return ['click', 'slide', 'drag', 'rotate', 'button'].includes(value)
+      }
+    },
+    config: {
+      default: () => ({})
+    },
+    events: {
+      default: () => ({})
+    },
+    data: {
+      default: () => ({})
+    },
+  },
+  data() {
+    return {}
+  },
+  components:{
+    click,
+    slide,
+    drag,
+    rotate,
+    btn
+  },
+  methods: {
+    _handleCbs(fnName){
+      if (this.type === 'click') {
+        this.$refs.clickRef && this.$refs.clickRef[fnName]  && this.$refs.clickRef[fnName]()
+      } else if (this.type === 'slide') {
+        this.$refs.slideRef && this.$refs.slideRef[fnName]  && this.$refs.slideRef[fnName]()
+      } else if (this.type === 'drag') {
+        this.$refs.dragRef && this.$refs.dragRef[fnName]  && this.$refs.dragRef[fnName]()
+      } else if (this.type === 'rotate') {
+        this.$refs.rotateRef && this.$refs.rotateRef[fnName]  && this.$refs.rotateRef[fnName]()
+      } else if (this.type === 'button') {
+        this.$refs.buttonRef && this.$refs.buttonRef[fnName]  && this.$refs.buttonRef[fnName]()
+      }
+    },
+    reset: () => {
+      return this._handleCbs('reset')
+    },
+    clear: () => {
+      return this._handleCbs('clear')
+    },
+    refresh: () => {
+      return this._handleCbs('refresh')
+    },
+    close: () => {
+      return this._handleCbs('close')
+    },
+  }
+}
+
+</script>
+// #endif
+
 
 <style>
 </style>

@@ -75,7 +75,7 @@
   </view>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import {computed, getCurrentInstance, reactive, toRaw, watch} from "vue"
 import {defaultConfig, defaultSlideData, defaultThemeColors} from "./meta/default";
 import {useHandler} from "./hooks/handler";

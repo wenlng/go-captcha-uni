@@ -1,9 +1,9 @@
 {
   "id": "go-captcha-uni",
   "name": "go-captcha-uni",
-  "displayName": "go-captcha-uni",
-  "version": "1.0.2",
-  "description": "UniApp 验证码组件，GoCaptcha 验证码，行为验证码组件，拼图滑块验证码，拼图拖放验证码，图像旋转验证码，点击验证码",
+  "displayName": "go-captcha-uni 验证码，行为验证码，点选验证码，滑动验证码，旋转验证码",
+  "version": "1.0.3",
+  "description": "验证码，UniApp 验证码，GoCaptcha 验证码，行为验证码，点选验证码，滑动验证码，旋转验证码，拼图滑块验证码，拼图拖放验证码，图像旋转验证码，点击验证码",
   "private": false,
   "type": "module",
   "main": "components/go-captcha-uni/go-captcha-uni.vue",
@@ -13,9 +13,9 @@
   "keywords": [
     "go-captcha",
     "go-captcha-uni",
-    "行为验证码组件",
+    "行为验证码",
     "验证码组件",
-    "前端验证码组件"
+    "前端验证码"
 ],
   "bugs": {
     "url": "https://github.com/wenlng/go-captcha-uni/issues"
@@ -55,7 +55,7 @@
       },
       "client": {
         "Vue": {
-          "vue2": "n",
+          "vue2": "y",
           "vue3": "y"
         },
         "App": {
