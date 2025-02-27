@@ -4,40 +4,54 @@
     <go-captcha-uni
         type="click"
         :data="clickData"
-        :events="clickEvents"
         :config="clickConfigData"
         ref="clickRef"
+        @event-click="clickEvents.click"
+        @event-confirm="clickEvents.confirm"
+        @event-refresh="clickEvents.refresh"
+        @event-close="clickEvents.close"
     />
     <view class="space" />
     <go-captcha-uni
         type="slide"
         :data="slideData"
-        :events="slideEvents"
         :config="slideConfigData"
         ref="slideRef"
+        @event-move="slideEvents.move"
+        @event-confirm="slideEvents.confirm"
+        @event-refresh="slideEvents.refresh"
+        @event-close="slideEvents.close"
     />
     <view class="space" />
     <go-captcha-uni
         type="drag"
         :data="dragData"
-        :events="dragEvents"
         :config="dragConfigData"
         ref="dragRef"
+
+        @event-move="dragEvents.move"
+        @event-confirm="dragEvents.confirm"
+        @event-refresh="dragEvents.refresh"
+        @event-close="dragEvents.close"
     />
     <view class="space" />
     <go-captcha-uni
         type="rotate"
         :data="rotateData"
-        :events="rotateEvents"
         :config="rotateConfigData"
         ref="rotateRef"
+
+        @event-rotate="rotateEvents.rotate"
+        @event-confirm="rotateEvents.confirm"
+        @event-refresh="rotateEvents.refresh"
+        @event-close="rotateEvents.close"
     />
     <view class="space" />
     <go-captcha-uni
         type="button"
         :data="{type: 'default', disabled: false}"
-        :events="{click: handleClick}"
         :config="{title: '这是测试触发的按钮'}"
+        @event-click="handleClick"
     />
     <view class="space" />
 	</view>
