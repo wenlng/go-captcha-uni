@@ -1,11 +1,11 @@
 <template>
   <view
-    :class="`go-captcha gc-wrapper ${localConfig.showTheme && 'gc-theme'}`"
-    :style="wrapperStyles"
+    :class="{'go-captcha': true, 'gc-wrapper': true, 'gc-theme': localConfig.showTheme}"
+    :style="[wrapperStyles]"
     v-show="hasDisplayWrapperState"
   >
     <view class="gc-header gc-header2">
-      <text class="gc-text" :style="{color: localTheme.textColor}">{{ localConfig.title }}</text>
+      <text class="gc-text" :style="[{color: localTheme.textColor}]">{{ localConfig.title }}</text>
       <view class="gc-icon-block">
 
       </view>
@@ -13,24 +13,24 @@
     <view
       class="gc-body"
       :id="`gc-drag-container-${ukey}`"
-      :style="{...imageStyles, backgroundColor: localTheme.bodyBgColor}"
+      :style="[imageStyles, {backgroundColor: localTheme.bodyBgColor}]"
       @touchmove.stop.prevent="dragMove"
       @mousemove.stop.prevent="mouseMove"
     >
       <view class="gc-loading">
-        <view class="gc-loading-icon" :style="{backgroundColor: localTheme.loadingIconColor}"/>
+        <view class="gc-loading-icon" :style="[{backgroundColor: localTheme.loadingIconColor}]"/>
       </view>
       <image
         class="gc-picture"
         v-show="hasDisplayImageState"
-        :style="imageStyles"
+        :style="[imageStyles]"
         :src="localData.image"
         alt=""
       />
       <view
         class="gc-tile"
         :id="`gc-drag-tile-${ukey}`"
-        :style="thumbStyles"
+        :style="[thumbStyles]"
       >
         <image
           class="gc-img"
@@ -50,12 +50,12 @@
       <view class="gc-icon-block">
         <view
             class="gc-icon icon-close-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="closeEvent"
         ></view>
         <view
             class="gc-icon icon-refresh-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="refreshEvent"
         ></view>
       </view>
@@ -76,10 +76,7 @@ export default {
   name: 'go-captcha-uni-drag',
   props: {
     config: {
-      default: () => defaultConfig
-    },
-    events: {
-      default: () => ({})
+      default: () => defaultConfig()
     },
     data: {
       default: () => defaultDragData()
@@ -91,7 +88,6 @@ export default {
   data() {
     return {
       localData: {...defaultDragData(), ...this.data},
-      localEvent: {...this.events},
       localConfig: {...defaultConfig(), ...this.config},
       localTheme: {...defaultThemeColors(), ...this.theme},
 
@@ -123,25 +119,22 @@ export default {
           this.state.y = newData.thumbY || 0
         }
       },
-      deep: true
-    },
-    events:{
-      handler(newData, oldVal){
-        Object.assign(this.localEvent, newData)
-      },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     config:{
       handler(newData, oldVal){
         Object.assign(this.localConfig, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     theme:{
       handler(newData, oldVal){
         Object.assign(this.localTheme, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -251,7 +244,8 @@ export default {
       this.state.y = top
       this.caches.tileLeft = left
       this.caches.tileTop = top
-      this.localEvent.move && this.localEvent.move(left, top)
+
+      this.$emit('event-move', left, top)
 
       e.cancelBubble = true
       e.preventDefault()
@@ -272,7 +266,7 @@ export default {
         return
       }
 
-      this.localEvent.confirm && this.localEvent.confirm({x: this.caches.tileLeft, y: this.caches.tileTop}, () => {
+      this.$emit('event-confirm', {x: this.caches.tileLeft, y: this.caches.tileTop}, () => {
         this.resetData()
       })
 
@@ -330,11 +324,11 @@ export default {
     },
 
     close() {
-      this.localEvent.close && this.localEvent.close()
+      this.$emit('event-close')
       this.resetData()
     },
     refresh(){
-      this.localEvent.refresh && this.localEvent.refresh()
+      this.$emit('event-refresh')
       this.resetData()
     },
     resetData (){

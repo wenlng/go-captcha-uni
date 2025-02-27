@@ -73,7 +73,7 @@
 </template>
 <script setup>
 import {computed, getCurrentInstance, reactive, toRaw, watch} from "vue"
-import {defaultConfig, defaultThemeColors} from "./meta/default";
+import {defaultConfig, defaultData, defaultThemeColors} from "./meta/default";
 
 import {useHandler} from "./hooks/handler";
 
@@ -86,7 +86,7 @@ const props = defineProps({
 		default: () => ({})
 	},
 	data: {
-		default: () => ({})
+		default: () => defaultData()
 	},
   theme: {
     default: () => defaultThemeColors()
@@ -96,7 +96,7 @@ const props = defineProps({
 const ukey = (new Date()).getMilliseconds()
 
 const { data, events, config, theme } = props;
-const localData = reactive({...toRaw(data)})
+const localData = reactive({...defaultData(), ...toRaw(data)})
 const localEvent = reactive({...toRaw(events)})
 const localConfig = reactive({...defaultConfig(), ...toRaw(config)})
 const localTheme = reactive({...defaultThemeColors(), ...toRaw(theme)})
@@ -117,7 +117,14 @@ watch(() => props.theme, (newData, _) => {
   Object.assign(localTheme, newData)
 },{ deep: true })
 
-const handler = useHandler(localData, localEvent, ukey, app, () => {
+const emit = defineEmits([
+  'event-click',
+  'event-confirm',
+  'event-refresh',
+  'event-close',
+]);
+
+const handler = useHandler(localData, localEvent, emit, ukey, app, () => {
   localData.thumb = ''
   localData.image = ''
 });

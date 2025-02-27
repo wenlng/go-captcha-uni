@@ -68,11 +68,14 @@ pnpm install go-captcha-uni
 ## Use Component
 
 ```vue
-<go-captcha-uni  type="click"
-                 :data="clickCaptData"
-                 :events="clickCaptEvents"
-                 :config="clickCaptConfig"
-                 :theme="clickThemeColor" />
+  <go-captcha-uni  type="click"
+                   :data="clickCaptData"
+                   :config="clickCaptConfig"
+                   :theme="clickThemeColor"
+                   @event-click="clickEvents"
+                   @event-confirm="confirmEvents"
+                   @event-refresh="refreshEvents"
+                   @event-close="closeEvents"/>
 ```
 
 
@@ -84,7 +87,6 @@ pnpm install go-captcha-uni
   :config="{}"
   :theme="{}"
   :data="{}"
-  :events="{}"
   ref="domRef"
 />
 
@@ -119,14 +121,6 @@ interface Data {
   thumb: string;
 }
 
-// events = {}
-interface Events {
-  click?: (x: number, y: number) => void;
-  refresh?: () => void;
-  close?: () => void;
-  confirm?: (dots: Array<ClickDot>, reset:() => void) => boolean;
-}
-
 // theme = {}
 interface Theme {
   textColor?: string; // '#ffffff'
@@ -146,6 +140,14 @@ interface Theme {
   dotBorderColor?: string;
 }
 
+// @events
+interface _ {
+  '@event-click'?: (x: number, y: number) => void;
+  '@event-refresh'?: () => void;
+  '@event-close'?: () => void;
+  '@event-confirm'?: (dots: Array<ClickDot>, reset:() => void) => boolean;
+}
+
 // export component method
 interface ExportMethods {
   reset: () => void,
@@ -163,7 +165,6 @@ interface ExportMethods {
     :config="{}"
     :theme="{}"
     :data="{}"
-    :events="{}"
     ref="domRef"
 />
 
@@ -200,15 +201,6 @@ interface Data {
   image: string;
   thumb: string;
 }
-
-// events = {}
-interface Events {
-  move?: (x: number, y: number) => void;
-  refresh?: () => void;
-  close?: () => void;
-  confirm?: (point: SlidePoint, reset:() => void) => boolean;
-}
-
 // theme = {}
 interface Theme {
   textColor?: string; // '#ffffff'
@@ -220,6 +212,14 @@ interface Theme {
   dragIconColor?: string;
   loadingIconColor?: string;
   bodyBgColor?: string;
+}
+
+// @events
+interface _ {
+  move?: (x: number, y: number) => void;
+  refresh?: () => void;
+  close?: () => void;
+  confirm?: (point: SlidePoint, reset:() => void) => boolean;
 }
 
 // export component method
@@ -239,7 +239,6 @@ interface ExportMethods {
     :config="{}"
     :theme="{}"
     :data="{}"
-    :events="{}"
     ref="domRef"
 />
 
@@ -277,14 +276,6 @@ interface Data {
   thumb: string;
 }
 
-// events = {}
-interface Events {
-  move?: (x: number, y: number) => void;
-  refresh?: () => void;
-  close?: () => void;
-  confirm?: (point: SlideRegionPoint, reset:() => void) => boolean;
-}
-
 // theme = {}
 interface Theme {
   textColor?: string; // '#ffffff'
@@ -293,6 +284,14 @@ interface Theme {
   iconColor?: string;
   loadingIconColor?: string;
   bodyBgColor?: string;
+}
+
+// @events
+interface _ {
+  '@event-move'?: (x: number, y: number) => void;
+  '@event-refresh'?: () => void;
+  '@event-close'?: () => void;
+  '@event-confirm'?: (point: SlideRegionPoint, reset:() => void) => boolean;
 }
 
 // export component method
@@ -312,7 +311,6 @@ interface ExportMethods {
     :config="{}"
     :theme="{}"
     :data="{}"
-    :events="{}"
     ref="domRef"
 />
 
@@ -347,14 +345,6 @@ interface Data {
   thumb: string;
 }
 
-// events = {}
-interface Events {
-  rotate?: (angle: number) => void;
-  refresh?: () => void;
-  close?: () => void;
-  confirm?: (angle: number, reset:() => void) => boolean;
-}
-
 // theme = {}
 interface Theme {
   textColor?: string; // '#ffffff'
@@ -367,6 +357,14 @@ interface Theme {
   roundColor?: string;
   loadingIconColor?: string;
   bodyBgColor?: string;
+}
+
+// @events
+interface _ {
+  '@event-rotate'?: (angle: number) => void;
+  '@event-refresh'?: () => void;
+  '@event-close'?: () => void;
+  '@event-confirm'?: (angle: number, reset:() => void) => boolean;
 }
 
 // export component method
@@ -387,7 +385,6 @@ interface ExportMethods {
     :config="{}"
     :theme="{}"
     :data="{}"
-    :events="{}"
 />
 ```
 
@@ -426,9 +423,9 @@ interface Theme {
   dotBorderColor?: string;
 }
 
-// events = {}
-interface Events {
-  click?: () => {}
+// @events
+interface _ {
+  '@event-click'?: () => {}
 }
 
 ```

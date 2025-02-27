@@ -1,20 +1,20 @@
 <template>
   <view
-      :class="`go-captcha gc-wrapper ${localConfig.showTheme && 'gc-theme'}`"
-      :style="wrapperStyles"
+      :class="{'go-captcha': true, 'gc-wrapper': true, 'gc-theme': localConfig.showTheme}"
+      :style="[wrapperStyles]"
       v-show="hasDisplayWrapperState"
   >
     <view class="gc-header">
-      <text class="gc-text" :style="{color: localTheme.textColor}">{{ localConfig.title }}</text>
+      <text class="gc-text" :style="[{color: localTheme.textColor}]">{{ localConfig.title }}</text>
       <view class="gc-icon-block">
         <view
             class="gc-icon icon-close-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="closeEvent"
         ></view>
         <view
             class="gc-icon icon-refresh-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="refreshEvent"
         ></view>
       </view>
@@ -22,22 +22,22 @@
     <view
         class="gc-body"
         :id="`gc-slide-container-${ukey}`"
-        :style="{...imageStyles, backgroundColor: localTheme.bodyBgColor}"
+        :style="[imageStyles, {backgroundColor: localTheme.bodyBgColor}]"
     >
       <view class="gc-loading">
-        <view class="gc-loading-icon" :style="{backgroundColor: localTheme.loadingIconColor}"/>
+        <view class="gc-loading-icon" :style="[{backgroundColor: localTheme.loadingIconColor}]"/>
       </view>
       <image
           class="gc-picture"
           v-show="hasDisplayImageState"
-          :style="imageStyles"
+          :style="[imageStyles]"
           :src="localData.image"
           alt=""
       />
       <view
           class="gc-tile"
           :id="`gc-slide-tile-${ukey}`"
-          :style="thumbStyles"
+          :style="[thumbStyles]"
       >
         <image
             class="gc-img"
@@ -57,9 +57,9 @@
         <view class="gc-drag-line" />
         <view
             class="gc-drag-block"
-            :class="!hasDisplayImageState && 'disabled'"
+            :class="{'disabled': !hasDisplayImageState}"
             :id="`gc-slide-drag-block-${ukey}`"
-            :style="{left: state.dragLeft + 'px'}"
+            :style="[{left: state.dragLeft + 'px'}]"
             @touchstart.stop.prevent="dragStart"
             @touchend="dragEnd"
             @mousedown.stop.prevent="mouseDown"
@@ -67,7 +67,7 @@
         >
           <view
               class="gc-icon icon-arrows-icon"
-              :style="{fontSize: localConfig.iconSize + 'px'}"
+              :style="[{fontSize: localConfig.iconSize + 'px'}]"
           ></view>
         </view>
       </view>
@@ -88,10 +88,7 @@ export default {
   name: 'go-captcha-uni-slide',
   props: {
     config: {
-      default: () => defaultConfig
-    },
-    events: {
-      default: () => ({})
+      default: () => defaultConfig()
     },
     data: {
       default: () => defaultSlideData()
@@ -103,7 +100,6 @@ export default {
   data() {
     return {
       localData: {...defaultSlideData(), ...this.data},
-      localEvent: {...this.events},
       localConfig: {...defaultConfig(), ...this.config},
       localTheme: {...defaultThemeColors(), ...this.theme},
 
@@ -134,25 +130,22 @@ export default {
           this.state.thumbLeft = newData.thumbX || 0
         }
       },
-      deep: true
-    },
-    events:{
-      handler(newData, oldVal){
-        Object.assign(this.localEvent, newData)
-      },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     config:{
       handler(newData, oldVal){
         Object.assign(this.localConfig, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     theme:{
       handler(newData, oldVal){
         Object.assign(this.localTheme, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -262,7 +255,7 @@ export default {
       this.state.dragLeft = left
       this.state.thumbLeft = this.caches.currentThumbX = ctX
 
-      this.localEvent.move && this.localEvent.move(this.caches.currentThumbX, this.localData.thumbY || 0)
+      this.$emit('event-move', this.caches.currentThumbX, this.localData.thumbY || 0)
 
       e.cancelBubble = true
       e.preventDefault()
@@ -281,7 +274,7 @@ export default {
         return
       }
 
-      this.localEvent.confirm && this.localEvent.confirm({x: parseInt(this.caches.currentThumbX.toString()), y: this.localData.thumbY || 0}, () => {
+      this.$emit('event-confirm', {x: parseInt(this.caches.currentThumbX.toString()), y: this.localData.thumbY || 0}, () => {
         this.resetData()
       })
 
@@ -337,11 +330,11 @@ export default {
     },
 
     close() {
-      this.localEvent.close && this.localEvent.close()
+      this.$emit('event-close')
       this.resetData()
     },
     refresh(){
-      this.localEvent.refresh && this.localEvent.refresh()
+      this.$emit('event-refresh')
       this.resetData()
     },
     resetData (){

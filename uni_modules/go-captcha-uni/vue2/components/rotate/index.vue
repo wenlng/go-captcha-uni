@@ -1,20 +1,20 @@
 <template>
   <view
-      :class="`go-captcha gc-wrapper ${localConfig.showTheme && 'gc-theme'}`"
-      :style="wrapperStyles"
+      :class="{'go-captcha': true, 'gc-wrapper': true, 'gc-theme': localConfig.showTheme}"
+      :style="[wrapperStyles]"
       v-show="hasDisplayWrapperState"
   >
     <view class="gc-header">
-      <text class="gc-text" :style="{color: localTheme.textColor}">{{ localConfig.title }}</text>
+      <text class="gc-text" :style="[{color: localTheme.textColor}]">{{ localConfig.title }}</text>
       <view class="gc-icon-block">
         <view
             class="gc-icon icon-close-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="closeEvent"
         ></view>
         <view
             class="gc-icon icon-refresh-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="refreshEvent"
         ></view>
       </view>
@@ -22,15 +22,15 @@
     <view
         class="gc-body gc-rotate-body"
         :id="`gc-rotate-container-${ukey}`"
-        :style="imageBlockStyles"
+        :style="[imageBlockStyles]"
     >
-      <view class="gc-body-inner" :style="{...imageStyles, backgroundColor: localTheme.bodyBgColor}">
+      <view class="gc-body-inner" :style="[imageStyles, {backgroundColor: localTheme.bodyBgColor}]">
         <view class="gc-loading">
-          <view class="gc-loading-icon" :style="{backgroundColor: localTheme.loadingIconColor}"/>
+          <view class="gc-loading-icon" :style="[{backgroundColor: localTheme.loadingIconColor}]"/>
         </view>
         <view
             class="gc-picture gc-rotate-picture"
-            :style="imageStyles"
+            :style="[imageStyles]"
         >
           <image
               class="gc-img"
@@ -38,11 +38,11 @@
               :src="localData.image"
               alt=""
           />
-          <view class="gc-round" :style="{borderColor: localTheme.roundColor}" />
+          <view class="gc-round" :style="[{borderColor: localTheme.roundColor}]" />
         </view>
 
         <view class="gc-thumb gc-rotate-thumb">
-          <view class="gc-rotate-thumb-block" :style="thumbStyles">
+          <view class="gc-rotate-thumb-block" :style="[thumbStyles]">
             <image
                 class="gc-img"
                 v-show="hasDisplayThumbImageState"
@@ -60,12 +60,12 @@
             @mousemove.stop.prevent="mouseMove"
             @mouseleave="mouseLeave"
       >
-        <view class="gc-drag-line" :style="{backgroundColor: localTheme.dragBarColor}"/>
+        <view class="gc-drag-line" :style="[{backgroundColor: localTheme.dragBarColor}]"/>
         <view
             class="gc-drag-block"
-            :class="!hasDisplayImageState && 'disabled'"
+            :class="{'disabled': !hasDisplayImageState}"
             :id="`gc-rotate-drag-block-${ukey}`"
-            :style="{left: state.dragLeft + 'px', backgroundColor: localTheme.dragBgColor}"
+            :style="[{left: state.dragLeft + 'px', backgroundColor: localTheme.dragBgColor}]"
             @touchstart.stop.prevent="dragStart"
             @touchend="dragEnd"
             @mousedown.stop.prevent="mouseDown"
@@ -73,7 +73,7 @@
         >
           <view
               class="gc-icon icon-arrows-icon"
-              :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.dragIconColor}"
+              :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.dragIconColor}]"
           ></view>
         </view>
       </view>
@@ -94,10 +94,7 @@ export default {
   name: 'go-captcha-uni-rotate',
   props: {
     config: {
-      default: () => defaultConfig
-    },
-    events: {
-      default: () => ({})
+      default: () => defaultConfig()
     },
     data: {
       default: () => defaultRotateData()
@@ -109,7 +106,6 @@ export default {
   data() {
     return {
       localData: {...defaultRotateData(), ...this.data},
-      localEvent: {...this.events},
       localConfig: {...defaultConfig(), ...this.config},
       localTheme: {...defaultThemeColors(), ...this.theme},
 
@@ -142,25 +138,22 @@ export default {
           this.state.thumbAngle = newData.angle || 0
         }
       },
-      deep: true
-    },
-    events:{
-      handler(newData, oldVal){
-        Object.assign(this.localEvent, newData)
-      },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     config:{
       handler(newData, oldVal){
         Object.assign(this.localConfig, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     theme:{
       handler(newData, oldVal){
         Object.assign(this.localTheme, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -279,7 +272,7 @@ export default {
       this.state.dragLeft = left
       this.state.thumbAngle = this.caches.currentAngle = this.caches.angle
 
-      this.localEvent.rotate && this.localEvent.rotate(this.caches.angle)
+      this.$emit('event-rotate', this.caches.angle)
 
       e.cancelBubble = true
       e.preventDefault()
@@ -298,7 +291,7 @@ export default {
         return
       }
 
-      this.localEvent.confirm && this.localEvent.confirm(parseInt(this.caches.currentAngle.toString()), () => {
+      this.$emit('event-confirm', parseInt(this.caches.currentAngle.toString()), () => {
         this.resetData()
       })
 
@@ -351,12 +344,12 @@ export default {
       e.preventDefault()
       return false
     },
-    close(){
-      this.localEvent && this.localEvent.close && this.localEvent.close()
+    close() {
+      this.$emit('event-close')
       this.resetData()
     },
     refresh(){
-      this.localEvent && this.localEvent.refresh && this.localEvent.refresh()
+      this.$emit('event-refresh')
       this.resetData()
     },
     resetData(){

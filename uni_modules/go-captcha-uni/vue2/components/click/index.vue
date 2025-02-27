@@ -1,24 +1,24 @@
 <template>
   <view
-      :class="`go-captcha gc-wrapper ${localConfig.showTheme && 'gc-theme'}`"
-      :style="wrapperStyles"
+      :class="{'go-captcha': true, 'gc-wrapper': true, 'gc-theme': localConfig.showTheme}"
+      :style="[wrapperStyles]"
       v-show="hasDisplayWrapperState"
   >
     <view class="gc-header">
-      <text class="gc-text" :style="{color: localTheme.textColor}">{{ localConfig.title }}</text>
+      <text class="gc-text" :style="[{color: localTheme.textColor}]">{{ localConfig.title }}</text>
       <image
           v-show="hasDisplayImageState"
-          :style="thumbStyles"
+          :style="[thumbStyles]"
           :src="localData.thumb"
           alt=""
       />
     </view>
-    <view class="gc-body" :style="{...imageStyles, backgroundColor: localTheme.bodyBgColor}">
+    <view class="gc-body" :style="[imageStyles, {backgroundColor: localTheme.bodyBgColor}]">
       <view class="gc-loading">
-        <view class="gc-loading-icon" :style="{backgroundColor: localTheme.loadingIconColor}"/>
+        <view class="gc-loading-icon" :style="[{backgroundColor: localTheme.loadingIconColor}]"/>
       </view>
       <image
-          :style="imageStyles"
+          :style="[imageStyles]"
           v-show="hasDisplayImageState"
           class="gc-picture"
           :src="localData.image"
@@ -30,8 +30,8 @@
         <view
             class="gc-dot"
             v-for="dot in list"
-            :key="`${dot.key + '-' + dot.index}`"
-            :style="{
+            :key="dot.key"
+            :style="[{
 	            width: localConfig.dotSize + 'px',
 	            height: localConfig.dotSize + 'px',
 	            borderRadius: localConfig.dotSize + 'px',
@@ -40,7 +40,7 @@
 	            color: localTheme.dotColor,
 	            backgroundColor: localTheme.dotBgColor,
 	            borderColor: localTheme.dotBorderColor,
-	          }"
+	          }]"
         >{{dot.index}}</view>
       </view>
     </view>
@@ -48,24 +48,24 @@
       <view class="gc-icon-block gc-icon-block2">
         <view
             class="gc-icon icon-close-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="closeEvent"
         ></view>
         <view
             class="gc-icon icon-refresh-icon"
-            :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
+            :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="refreshEvent"
         ></view>
       </view>
       <view class="gc-button-block">
         <button
-            :class="`gc-button ${!hasDisplayImageState ? 'disabled' : ''}`"
+            :class="{'gc-button': true, 'disabled': !hasDisplayImageState}"
             @click="confirmEvent"
-            :style="{
+            :style="[{
               color: localTheme.btnColor,
               borderColor: hasDisplayImageState ? localTheme.btnBorderColor : localTheme.btnDisabledColor,
               backgroundColor: hasDisplayImageState ? localTheme.btnBgColor : localTheme.btnDisabledColor,
-            }"
+            }]"
         >{{ localConfig.buttonText }}</button>
       </view>
     </view>
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import {defaultConfig, defaultThemeColors} from "../../../components/click/meta/default";
+import {defaultConfig, defaultData, defaultThemeColors} from "../../../components/click/meta/default";
 import {getXY} from "../../../helper/helper";
 
 import '../../../assets/icons/style.css'
@@ -82,13 +82,10 @@ export default {
   name: 'go-captcha-uni-click',
   props: {
     config: {
-      default: () => defaultConfig
-    },
-    events: {
-      default: () => ({})
+      default: () => defaultConfig()
     },
     data: {
-      default: () => ({})
+      default: () => defaultData()
     },
     theme: {
       default: () => defaultThemeColors()
@@ -96,8 +93,7 @@ export default {
   },
   data() {
     return {
-      localData: {...this.data},
-      localEvent: {...this.events},
+      localData: {...defaultData(), ...this.data},
       localConfig: {...defaultConfig(), ...this.config},
       localTheme: {...defaultThemeColors(), ...this.theme},
 
@@ -110,25 +106,22 @@ export default {
       handler(newData, oldVal){
         Object.assign(this.localData, newData)
       },
-      deep: true
-    },
-    events:{
-      handler(newData, oldVal){
-        Object.assign(this.localEvent, newData)
-      },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     config:{
       handler(newData, oldVal){
         Object.assign(this.localConfig, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     theme:{
       handler(newData, oldVal){
         Object.assign(this.localTheme, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -201,16 +194,18 @@ export default {
       const index = this.list.length
 
       this.list.push({key: date.getTime(), index: index + 1, x: xx, y: yy})
-      this.localEvent.click && this.localEvent.click(xx, yy)
+      this.$emit('event-click', xx, yy)
     },
 
     confirmEvent(e){
       let list = this.list.map((dot)=>{
         return {key: dot.key, index: dot.index, x: dot.x, y: dot.y}
       })
-      this.localEvent.confirm && this.localEvent.confirm(list, () => {
+
+      this.$emit('event-confirm', list, () => {
         this.resetData()
       })
+
       e.cancelBubble = true
       e.preventDefault()
       return false
@@ -229,11 +224,11 @@ export default {
     },
 
     close() {
-      this.localEvent.close && this.localEvent.close()
+      this.$emit('event-close')
       this.resetData()
     },
     refresh(){
-      this.localEvent.refresh && this.localEvent.refresh()
+      this.$emit('event-refresh')
       this.resetData()
     },
     resetData (){

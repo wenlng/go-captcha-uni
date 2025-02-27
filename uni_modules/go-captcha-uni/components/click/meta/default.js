@@ -12,6 +12,12 @@ export const defaultConfig = () => ({
   dotSize: 24,
 })
 
+
+export const defaultData = () => ({
+  image: '',
+  thumb: ''
+})
+
 export const defaultThemeColors = () => ({
   textColor: '#333333',
   bgColor: '#ffffff',
