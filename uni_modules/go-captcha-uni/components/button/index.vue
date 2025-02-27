@@ -130,8 +130,10 @@ const handleMouseLeave = () => {
   isHovered.value = false
 }
 
+const emit = defineEmits(['event-click']);
 const handleClickEvent = () => {
   localEvent.click && localEvent.click()
+  emit('event-click')
 }
 
 </script>

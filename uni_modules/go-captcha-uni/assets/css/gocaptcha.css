@@ -178,7 +178,7 @@
     justify-items: center
 }
 
-.go-captcha .gc-icon-block img {
+.go-captcha .gc-icon-block .gc-img {
     margin: 0 5px;
     cursor: pointer
 }
@@ -281,7 +281,7 @@
     fill: #ffffff;
 }
 
-.go-captcha .gc-drag-block img {
+.go-captcha .gc-drag-block .gc-img {
     height: 22px
 }
 

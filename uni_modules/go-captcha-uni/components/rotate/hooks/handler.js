@@ -5,6 +5,7 @@ export function useHandler(
   data,
   event,
   config,
+  emit,
   ukey,
   app,
   clearCbs
@@ -102,6 +103,7 @@ export function useHandler(
     state.thumbAngle = caches.currentAngle = caches.angle
 
     event.rotate && event.rotate(caches.angle)
+    emit('event-rotate', caches.angle)
 
     e.cancelBubble = true
     e.preventDefault()
@@ -122,6 +124,10 @@ export function useHandler(
     }
 
     event.confirm && event.confirm(parseInt(caches.currentAngle.toString()), () => {
+      resetData()
+    })
+
+    emit('event-confirm', parseInt(caches.currentAngle.toString()), () => {
       resetData()
     })
 
@@ -184,12 +190,14 @@ export function useHandler(
   }
 
   const close = () => {
-    event && event.close && event.close()
+    event.close && event.close()
+    emit('event-close')
     resetData()
   }
 
   const refresh = () => {
-    event && event.refresh && event.refresh()
+    event.refresh && event.refresh()
+    emit('event-refresh')
     resetData()
   }
 

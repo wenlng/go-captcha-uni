@@ -1,7 +1,7 @@
 import {reactive, toRaw} from "vue";
 import {getXY} from "../../../helper/helper.js";
 
-export function useHandler(_, event, ukey, app, clearCbs) {
+export function useHandler(_, event, emit, ukey, app, clearCbs) {
   const dots = reactive({list: []})
 
   const clickEvent = (e) => {
@@ -41,12 +41,17 @@ export function useHandler(_, event, ukey, app, clearCbs) {
     dots.list.push({key: date.getTime(), index: index + 1, x: xx, y: yy})
 
     event.click && event.click(xx, yy)
+    emit('event-click', xx, yy)
   }
 
   const confirmEvent = (e) => {
     event.confirm && event.confirm(toRaw(dots.list), () => {
       resetData()
     })
+    emit('event-confirm', toRaw(dots.list), () => {
+      resetData()
+    })
+
     e.cancelBubble = true
     e.preventDefault()
     return false
@@ -68,11 +73,13 @@ export function useHandler(_, event, ukey, app, clearCbs) {
 
   const close = () => {
     event.close && event.close()
+    emit('event-close')
     resetData()
   }
 
   const refresh = () => {
     event.refresh && event.refresh()
+    emit('event-refresh')
     resetData()
   }
 

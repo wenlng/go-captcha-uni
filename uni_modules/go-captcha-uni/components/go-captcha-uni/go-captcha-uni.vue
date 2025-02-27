@@ -1,19 +1,70 @@
 // #ifdef VUE3
 <template>
   <template v-if="props.type.toLocaleString() === 'click'">
-    <click ref="clickRef" :config="props.config" :events="props.events" :data="props.data" :theme="props.theme"></click>
+    <click
+      ref="clickRef"
+      :config="props.config"
+      :events="props.events"
+      :data="props.data"
+      :theme="props.theme"
+
+      @event-click="emitClick"
+      @event-confirm="emitConfirm"
+      @event-refresh="emitRefresh"
+      @event-close="emitClose"
+    ></click>
   </template>
   <template v-else-if="props.type.toLocaleString() === 'slide'">
-    <slide ref="slideRef" :config="props.config" :events="props.events" :data="props.data" :theme="props.theme"></slide>
+    <slide
+      ref="slideRef"
+      :config="props.config"
+      :events="props.events"
+      :data="props.data"
+      :theme="props.theme"
+
+      @event-move="emitMove"
+      @event-confirm="emitConfirm"
+      @event-refresh="emitRefresh"
+      @event-close="emitClose"
+    ></slide>
   </template>
   <template v-else-if="props.type.toLocaleString() === 'drag'">
-    <drag ref="dragRef" :config="props.config" :events="props.events" :data="props.data" :theme="props.theme"></drag>
+    <drag
+      ref="dragRef"
+      :config="props.config"
+      :events="props.events"
+      :data="props.data"
+      :theme="props.theme"
+
+      @event-move="emitMove"
+      @event-confirm="emitConfirm"
+      @event-refresh="emitRefresh"
+      @event-close="emitClose"
+    ></drag>
   </template>
   <template v-else-if="props.type.toLocaleString() === 'rotate'">
-    <rotate ref="rotateRef" :config="props.config" :events="props.events" :data="props.data" :theme="props.theme"></rotate>
+    <rotate
+      ref="rotateRef"
+      :config="props.config"
+      :events="props.events"
+      :data="props.data"
+      :theme="props.theme"
+
+      @event-rotate="emitRotate"
+      @event-confirm="emitConfirm"
+      @event-refresh="emitRefresh"
+      @event-close="emitClose"
+    ></rotate>
   </template>
   <template v-else-if="props.type.toLocaleString() === 'button'">
-    <btn ref="buttonRef" :config="props.config" :events="props.events" :data="props.data" :theme="props.theme"></btn>
+    <btn
+      ref="buttonRef"
+      :config="props.config"
+      :events="props.events"
+      :data="props.data"
+      :theme="props.theme"
+      @event-click="emitClick"
+    ></btn>
   </template>
 </template>
 
@@ -73,6 +124,39 @@ const makeCbsFnWithName = (fnName) => {
   }
 }
 
+
+const emit = defineEmits([
+  'event-click',
+  'event-move',
+  'event-rotate',
+  'event-confirm',
+  'event-refresh',
+  'event-close',
+]);
+const emitClick = (...arg) => {
+  emit('event-click', ...arg)
+}
+
+const emitMove = (...arg) => {
+  emit('event-move', ...arg)
+}
+
+const emitRotate = (...arg) => {
+  emit('event-rotate', ...arg)
+}
+
+const emitConfirm = (...arg) => {
+  emit('event-confirm', ...arg)
+}
+
+const emitRefresh = () => {
+  emit('event-refresh')
+}
+
+const emitClose = () => {
+  emit('event-close')
+}
+
 defineExpose({
   reset: makeCbsFnWithName('reset'),
   clear: makeCbsFnWithName('clear'),
@@ -85,23 +169,75 @@ defineExpose({
 
 // #ifndef VUE3
 <template>
-  <click v-if="type.toLocaleString() === 'click'" ref="clickRef" :config="config" :events="events" :data="data"></click>
+  <click
+    v-if="type.toLocaleString() === 'click'"
+    ref="clickRef"
+    :config="config"
+    :data="data"
+    :theme="theme"
 
-  <slide v-else-if="type.toLocaleString() === 'slide'" ref="slideRef" :config="config" :events="events" :data="data"></slide>
+    @event-click="emitClick"
+    @event-confirm="emitConfirm"
+    @event-refresh="emitRefresh"
+    @event-close="emitClose"
+  ></click>
 
-  <drag v-else-if="type.toLocaleString() === 'drag'" ref="dragRef" :config="config" :events="events" :data="data"></drag>
+  <slide
+    v-else-if="type.toLocaleString() === 'slide'"
+    ref="slideRef"
+    :config="config"
+    :data="data"
+    :theme="theme"
 
-  <rotate v-else-if="type.toLocaleString() === 'rotate'" ref="rotateRef" :config="config" :events="events" :data="data"></rotate>
+    @event-move="emitMove"
+    @event-confirm="emitConfirm"
+    @event-refresh="emitRefresh"
+    @event-close="emitClose"
+  ></slide>
 
-  <btn v-else-if="type.toLocaleString() === 'button'" ref="buttonRef" :config="config" :events="events" :data="data"></btn>
+  <drag
+    v-else-if="type.toLocaleString() === 'drag'"
+    ref="dragRef"
+    :config="config"
+    :data="data"
+    :theme="theme"
+
+    @event-move="emitMove"
+    @event-confirm="emitConfirm"
+    @event-refresh="emitRefresh"
+    @event-close="emitClose"
+  ></drag>
+
+  <rotate
+    v-else-if="type.toLocaleString() === 'rotate'"
+    ref="rotateRef"
+    :config="config"
+    :data="data"
+    :theme="theme"
+
+    @event-rotate="emitRotate"
+    @event-confirm="emitConfirm"
+    @event-refresh="emitRefresh"
+    @event-close="emitClose"
+  ></rotate>
+
+  <btn
+    v-else-if="type.toLocaleString() === 'button'"
+    ref="buttonRef"
+    :config="config"
+    :data="data"
+    :theme="theme"
+
+    @event-click="emitClick"
+  ></btn>
 </template>
 
 <script>
-import click from '../../vue2/components/click'
-import slide from '../../vue2/components/slide'
-import drag from '../../vue2/components/drag'
-import rotate from '../../vue2/components/rotate'
-import btn from '../../vue2/components/button'
+import click from '../../vue2/components/click/index.vue'
+import slide from '../../vue2/components/slide/index.vue'
+import drag from '../../vue2/components/drag/index.vue'
+import rotate from '../../vue2/components/rotate/index.vue'
+import btn from '../../vue2/components/button/index.vue'
 
 export default {
   name: 'go-captcha-uni',
@@ -115,10 +251,10 @@ export default {
     config: {
       default: () => ({})
     },
-    events: {
+    data: {
       default: () => ({})
     },
-    data: {
+    theme: {
       default: () => ({})
     },
   },
@@ -146,23 +282,40 @@ export default {
         this.$refs.buttonRef && this.$refs.buttonRef[fnName]  && this.$refs.buttonRef[fnName]()
       }
     },
-    reset: () => {
+
+    reset(){
       return this._handleCbs('reset')
     },
-    clear: () => {
+    clear(){
       return this._handleCbs('clear')
     },
-    refresh: () => {
+    refresh(){
       return this._handleCbs('refresh')
     },
-    close: () => {
+    close(){
       return this._handleCbs('close')
+    },
+
+    emitMove(...arg) {
+      this.$emit('event-move', ...arg)
+    },
+    emitClick(...arg) {
+      this.$emit('event-click', ...arg)
+    },
+    emitRotate(...arg) {
+      this.$emit('event-rotate', ...arg)
+    },
+    emitConfirm(...arg) {
+      this.$emit('event-confirm', ...arg)
+    },
+    emitRefresh() {
+      this.$emit('event-refresh')
+    },
+    emitClose() {
+      this.$emit('event-close')
     },
   }
 }
 
 </script>
 // #endif
-
-<style>
-</style>

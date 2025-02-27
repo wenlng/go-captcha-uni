@@ -5,6 +5,7 @@ export function useHandler(
   data,
   event,
   config,
+  emit,
   ukey,
   app,
   clearCbs
@@ -102,6 +103,7 @@ export function useHandler(
     state.thumbLeft = caches.currentThumbX = ctX
 
     event.move && event.move(caches.currentThumbX, data.thumbY || 0)
+    emit('event-move', caches.currentThumbX, data.thumbY || 0)
 
     e.cancelBubble = true
     e.preventDefault()
@@ -123,6 +125,10 @@ export function useHandler(
     }
 
     event.confirm && event.confirm({x: parseInt(caches.currentThumbX.toString()), y: data.thumbY || 0}, () => {
+      resetData()
+    })
+
+    emit('event-confirm', {x: parseInt(caches.currentThumbX.toString()), y: data.thumbY || 0}, () => {
       resetData()
     })
 
@@ -185,12 +191,14 @@ export function useHandler(
   }
 
   const close = () => {
-    event && event.close && event.close()
+    event.close && event.close()
+    emit('event-close')
     resetData()
   }
 
   const refresh = () => {
-    event && event.refresh && event.refresh()
+    event.refresh && event.refresh()
+    emit('event-refresh')
     resetData()
   }
 

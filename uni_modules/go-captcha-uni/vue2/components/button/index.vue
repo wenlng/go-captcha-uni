@@ -1,16 +1,16 @@
 <template>
   <button
     :class="btnClass"
-    :style="btnStyle"
+    :style="[btnStyle]"
     @click="handleClickEvent"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
-    <view :class="localData.type === 'default' ? 'gc-ripple' : ''">
+    <view :class="{'gc-ripple': localData.type}">
       <view class="gc-icon gc-btn-icon icon-btn-default-icon" v-if="localData.type === 'default'">
         <span class="path1"></span>
         <span class="path2"></span>
-        <view class="gc-icon-ripple-ef" :style="{backgroundColor: localTheme.defaultColor}"/>
+        <view class="gc-icon-ripple-ef" :style="[{backgroundColor: localTheme.defaultColor}]"/>
       </view>
       <view class="gc-icon gc-btn-icon icon-btn-warn-icon" v-else-if="localData.type === 'warn'"></view>
       <view class="gc-icon gc-btn-icon icon-btn-error-icon" v-else-if="localData.type === 'error'"></view>
@@ -31,9 +31,6 @@ export default {
     config: {
       default: () => defaultConfig()
     },
-    events: {
-      default: () => ({})
-    },
     data: {
       default: () => defaultButtonData()
     },
@@ -44,7 +41,6 @@ export default {
   data() {
     return {
       localData: {...defaultButtonData(), ...this.data},
-      localEvent: {...this.events},
       localConfig: {...defaultConfig(), ...this.config},
       localTheme: {...defaultThemeColors(), ...this.theme},
 
@@ -56,25 +52,22 @@ export default {
       handler(newData, oldVal){
         Object.assign(this.localData, newData)
       },
-      deep: true
-    },
-    events:{
-      handler(newData, oldVal){
-        Object.assign(this.localEvent, newData)
-      },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     config:{
       handler(newData, oldVal){
         Object.assign(this.localConfig, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
     theme:{
       handler(newData, oldVal){
         Object.assign(this.localTheme, newData)
       },
-      deep: true
+      deep: true,
+      immediate: true,
     },
   },
   computed: {
@@ -141,7 +134,7 @@ export default {
       this.isHovered = false
     },
     handleClickEvent(){
-      this.localEvent.click && this.localEvent.click()
+      this.$emit('event-click')
     }
   }
 }

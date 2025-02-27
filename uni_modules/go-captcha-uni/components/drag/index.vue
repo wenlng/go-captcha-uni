@@ -108,10 +108,18 @@ watch(() => props.theme, (newData, _) => {
   Object.assign(localTheme, newData)
 },{ deep: true })
 
+const emit = defineEmits([
+  'event-move',
+  'event-confirm',
+  'event-refresh',
+  'event-close',
+]);
+
 const handler = useHandler(
     localData,
     localEvent,
     localConfig,
+    emit,
     ukey,
     app,
     () => {

@@ -5,6 +5,7 @@ export function useHandler(
   data,
   event,
   config,
+  emit,
   ukey,
   app,
   clearCbs
@@ -102,6 +103,7 @@ export function useHandler(
     caches.tileLeft = left
     caches.tileTop = top
     event.move && event.move(left, top)
+    emit('event-move', left, top)
 
     e.cancelBubble = true
     e.preventDefault()
@@ -124,6 +126,10 @@ export function useHandler(
     }
 
     event.confirm && event.confirm({x: caches.tileLeft, y: caches.tileTop}, () => {
+      resetData()
+    })
+
+    emit('event-confirm', {x: caches.tileLeft, y: caches.tileTop}, () => {
       resetData()
     })
 
@@ -187,12 +193,14 @@ export function useHandler(
   }
 
   const close = () => {
-    event && event.close && event.close()
+    event.close && event.close()
+    emit('event-close')
     resetData()
   }
 
   const refresh = () => {
-    event && event.refresh && event.refresh()
+    event.refresh && event.refresh()
+    emit('event-refresh')
     resetData()
   }
 
