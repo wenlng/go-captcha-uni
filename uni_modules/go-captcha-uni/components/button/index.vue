@@ -110,6 +110,7 @@ const btnStyle = computed(() => {
     btnColorStyle = successBtnStyle.value
   }
 
+console.log(localConfig)
   return {
     width:  localConfig.width + "px",
     height: localConfig.height + "px",
