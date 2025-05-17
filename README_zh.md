@@ -18,7 +18,7 @@
 
 <br/>
 
-<p style="text-align: center"> ⭐️ 如果能帮助到你，请随手给点一个star</p>
+<p style="text-align: center"> ⭐️ 如果能帮助到你，请随手给点一个star，<a href="https://github.com/wenlng/go-captcha-uni" target="_blank">go-captcha-uni</a></p>
 <p style="text-align: center">QQ交流群：178498936</p>
 
 <img src="https://github.com/wenlng/git-assets/blob/master/go-captcha/go-captcha-v2.jpg?raw=true" alt="Poster">
@@ -28,23 +28,27 @@
 <hr/>
 <br/>
 
-## 链接索引
+## 其他项目
 
-| 项目名称                                                               | 说明                                  |
-|--------------------------------------------------------------------|-------------------------------------|
-| [document](http://gocaptcha.wencodes.com)                          | GoCaptcha 文档                        |
-| [online demo](http://gocaptcha.wencodes.com/demo/)                 | GoCaptcha 在线演示                      |
-| [go-captcha-example](https://github.com/wenlng/go-captcha-example) | Golang + 前端 + APP实例                 |
-| [go-captcha-assets](https://github.com/wenlng/go-captcha-assets)   | Golang 内嵌素材资源                       |
-| [go-captcha](https://github.com/wenlng/go-captcha)                 | Golang 验证码                          |
-| [go-captcha-jslib](https://github.com/wenlng/go-captcha-jslib)     | Javascript 验证码                      |
-| [go-captcha-vue](https://github.com/wenlng/go-captcha-vue)         | Vue 验证码                             |
-| [go-captcha-react](https://github.com/wenlng/go-captcha-react)     | React 验证码                           |
-| [go-captcha-angular](https://github.com/wenlng/go-captcha-angular) | Angular 验证码                         |
-| [go-captcha-svelte](https://github.com/wenlng/go-captcha-svelte)   | Svelte 验证码                          |
-| [go-captcha-solid](https://github.com/wenlng/go-captcha-solid)     | Solid 验证码                           |
-| [go-captcha-uni](https://github.com/wenlng/go-captcha-uni)         | UniApp 验证码，兼容 Android、IOS、小程序、快应用等  |
-| ...                                                                |                                     |
+
+| 名称                                                                         | 描述                                                                                          |
+|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| [document](http://gocaptcha.wencodes.com)                                  | GoCaptcha 文档                                                                                |
+| [online demo](http://gocaptcha.wencodes.com/demo/)                         | GoCaptcha 在线演示                                                                              |
+| [go-captcha-example](https://github.com/wenlng/go-captcha-example)         | Golang + 前端 + APP实例                                                                         |
+| [go-captcha-assets](https://github.com/wenlng/go-captcha-assets)           | Golang 内嵌素材资源                                                                               |
+| [go-captcha](https://github.com/wenlng/go-captcha)                         | Golang 验证码                                                                                  |
+| [go-captcha-jslib](https://github.com/wenlng/go-captcha-jslib)             | Javascript 验证码                                                                              |
+| [go-captcha-vue](https://github.com/wenlng/go-captcha-vue)                 | Vue 验证码                                                                                     |
+| [go-captcha-react](https://github.com/wenlng/go-captcha-react)             | React 验证码                                                                                   |
+| [go-captcha-angular](https://github.com/wenlng/go-captcha-angular)         | Angular 验证码                                                                                 |
+| [go-captcha-svelte](https://github.com/wenlng/go-captcha-svelte)           | Svelte 验证码                                                                                  |
+| [go-captcha-solid](https://github.com/wenlng/go-captcha-solid)             | Solid 验证码                                                                                   |
+| [go-captcha-uni](https://github.com/wenlng/go-captcha-uni)                 | UniApp 验证码，兼容 App、小程序、快应用等                                                                  |
+| [go-captcha-service](https://github.com/wenlng/go-captcha-service)         | GoCaptcha 服务，支持二进制、Docker镜像等方式部署，<br/> 提供 HTTP/GRPC 方式访问接口，<br/>可用单机模式和分布式（服务发现、负载均衡、动态配置等） |
+| [go-captcha-service-sdk](https://github.com/wenlng/go-captcha-service-sdk) | GoCaptcha 服务SDK工具包，包含 HTTP/GRPC 请求服务接口，<br/>支持静态模式、服务发现、负载均衡                                |
+| ...                                                                        |                                                                                             |
+                     |
 
 <br/>
 
@@ -74,10 +78,10 @@ pnpm install go-captcha-uni
                    :data="clickCaptData"
                    :config="clickCaptConfig"
                    :theme="clickThemeColor"
-                   @event-click="clickEvents"
-                   @event-confirm="confirmEvents"
-                   @event-refresh="refreshEvents"
-                   @event-close="closeEvents"/>
+                   @event-click="handleClickEvent"
+                   @event-confirm="handleConfirmEvent"
+                   @event-refresh="handleRefreshEvent"
+                   @event-close="handleCloseEvent"/>
 </template>
 ```
 
@@ -89,10 +93,10 @@ pnpm install go-captcha-uni
                    :data="clickCaptData"
                    :config="clickCaptConfig"
                    :theme="clickThemeColor"
-                   @event-click="clickEvents"
-                   @event-confirm="confirmEvents"
-                   @event-refresh="refreshEvents"
-                   @event-close="closeEvents"/>
+                   @event-click="handleClickEvent"
+                   @event-confirm="handleConfirmEvent"
+                   @event-refresh="handleRefreshEvent"
+                   @event-close="handleCloseEvent"/>
 </template>
 
 <script>
@@ -239,10 +243,10 @@ interface Theme {
 
 // @events
 interface _{
-  '@evennt-move'?: (x: number, y: number) => void;
-  '@evennt-refresh'?: () => void;
-  '@evennt-close'?: () => void;
-  '@evennt-confirm'?: (point: SlidePoint, reset:() => void) => boolean;
+  '@event-move'?: (x: number, y: number) => void;
+  '@event-refresh'?: () => void;
+  '@event-close'?: () => void;
+  '@event-confirm'?: (point: SlidePoint, reset:() => void) => boolean;
 }
 
 // export component method
@@ -363,9 +367,9 @@ interface Config {
 
 // data = {}
 interface Data {
-  angle: number;
   image: string;
   thumb: string;
+  thumbSize: number;
 }
 // theme = {}
 interface Theme {
@@ -452,6 +456,14 @@ interface _ {
 }
 
 ```
+
+<br/>
+
+## 后端服务【可选】
+服务支持二进制、Docker镜像等方式部署
+[go-captcha-service](https://github.com/wenlng/go-captcha-service)
+
+<br/>
 
 ## 👍 赞助一下
 
