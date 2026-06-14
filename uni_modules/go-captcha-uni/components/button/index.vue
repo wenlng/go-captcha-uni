@@ -7,14 +7,14 @@
     @mouseleave="handleMouseLeave"
   >
     <view :class="localData.type === 'default' ? 'gc-ripple' : ''">
-      <view class="gc-icon gc-btn-icon icon-btn-default-icon" v-if="localData.type === 'default'">
+      <view class="gc-icon gc-btn-icon gc-icon-btn-default-icon" v-if="localData.type === 'default'">
         <span class="path1"></span>
         <span class="path2"></span>
         <view class="gc-icon-ripple-ef" :style="{backgroundColor: localTheme.defaultColor}"/>
       </view>
-      <view class="gc-icon gc-btn-icon icon-btn-warn-icon" v-else-if="localData.type === 'warn'"></view>
-      <view class="gc-icon gc-btn-icon icon-btn-error-icon" v-else-if="localData.type === 'error'"></view>
-      <view class="gc-icon gc-btn-icon icon-btn-success-icon" v-else-if="localData.type === 'success'"></view>
+      <view class="gc-icon gc-btn-icon gc-icon-btn-warn-icon" v-else-if="localData.type === 'warn'"></view>
+      <view class="gc-icon gc-btn-icon gc-icon-btn-error-icon" v-else-if="localData.type === 'error'"></view>
+      <view class="gc-icon gc-btn-icon gc-icon-btn-success-icon" v-else-if="localData.type === 'success'"></view>
     </view>
     <span>{{localConfig.title}}</span>
   </button>

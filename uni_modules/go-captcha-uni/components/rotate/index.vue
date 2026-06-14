@@ -8,12 +8,12 @@
       <text class="gc-text" :style="{color: localTheme.textColor}">{{ localConfig.title }}</text>
       <view class="gc-icon-block">
         <view
-            class="gc-icon icon-close-icon"
+            class="gc-icon gc-icon-close-icon"
             :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
             @click="handler.closeEvent"
         ></view>
         <view
-            class="gc-icon icon-refresh-icon"
+            class="gc-icon gc-icon-refresh-icon"
             :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
             @click="handler.refreshEvent"
         ></view>
@@ -33,8 +33,8 @@
             :style="imageStyles"
         >
           <image
+              v-if="localData.image"
               class="gc-img"
-              v-show="hasDisplayImageState"
               :src="localData.image"
               alt=""
           />
@@ -44,8 +44,8 @@
         <view class="gc-thumb gc-rotate-thumb">
           <view class="gc-rotate-thumb-block" :style="thumbStyles">
             <image
+                v-if="localData.thumb"
                 class="gc-img"
-                v-show="hasDisplayThumbImageState"
                 :src="localData.thumb"
                 alt=""
             />
@@ -72,7 +72,7 @@
             @mouseup="handler.mouseUp"
         >
           <view
-              class="gc-icon icon-arrows-icon"
+              class="gc-icon gc-icon-arrows-icon"
               :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.dragIconColor}"
           ></view>
         </view>

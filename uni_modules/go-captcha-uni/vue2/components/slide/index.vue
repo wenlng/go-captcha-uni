@@ -8,12 +8,12 @@
       <text class="gc-text" :style="[{color: localTheme.textColor}]">{{ localConfig.title }}</text>
       <view class="gc-icon-block">
         <view
-            class="gc-icon icon-close-icon"
+            class="gc-icon gc-icon-close-icon"
             :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="closeEvent"
         ></view>
         <view
-            class="gc-icon icon-refresh-icon"
+            class="gc-icon gc-icon-refresh-icon"
             :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="refreshEvent"
         ></view>
@@ -66,7 +66,7 @@
             @mouseup="mouseUp"
         >
           <view
-              class="gc-icon icon-arrows-icon"
+              class="gc-icon gc-icon-arrows-icon"
               :style="[{fontSize: localConfig.iconSize + 'px'}]"
           ></view>
         </view>
