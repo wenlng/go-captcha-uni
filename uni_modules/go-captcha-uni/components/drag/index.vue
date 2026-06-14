@@ -21,8 +21,8 @@
         <view class="gc-loading-icon" :style="{backgroundColor: localTheme.loadingIconColor}"/>
       </view>
       <image
+        v-if="localData.image"
         class="gc-picture"
-        v-show="hasDisplayImageState"
         :style="imageStyles"
         :src="localData.image"
         alt=""
@@ -33,8 +33,8 @@
         :style="thumbStyles"
       >
         <image
+          v-if="localData.thumb"
           class="gc-img"
-          v-show="hasDisplayThumbImageState"
           :src="localData.thumb"
           @dragstart.stop.prevent="(e)=> {e.preventDefault();return false;}"
           @touchstart.stop.prevent="handler.dragStart"
@@ -49,12 +49,12 @@
     <view class="gc-footer">
       <view class="gc-icon-block">
         <view
-            class="gc-icon icon-close-icon"
+            class="gc-icon gc-icon-close-icon"
             :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
             @click="handler.closeEvent"
         ></view>
         <view
-            class="gc-icon icon-refresh-icon"
+            class="gc-icon gc-icon-refresh-icon"
             :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
             @click="handler.refreshEvent"
         ></view>

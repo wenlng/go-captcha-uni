@@ -7,7 +7,7 @@
 	    <view class="gc-header">
 	      <text class="gc-text" :style="{color: localTheme.textColor}">{{ localConfig.title }}</text>
 	      <image
-	        v-show="hasDisplayImageState"
+	        v-if="localData.thumb"
 	        :style="thumbStyles"
 	        :src="localData.thumb"
 	        alt=""
@@ -18,13 +18,13 @@
 	        <view class="gc-loading-icon" :style="{backgroundColor: localTheme.loadingIconColor}"/>
 	      </view>
 	      <image
+	        v-if="localData.image"
 	        :style="imageStyles"
-	        v-show="hasDisplayImageState"
 	        class="gc-picture"
 	        :src="localData.image"
 	        @click="handler.clickEvent"
 	        alt=""
-          :id="`gc-click-picture-${ukey}`"
+	        :id="`gc-click-picture-${ukey}`"
 	      />
 	      <view class="gc-dots">
 	        <view
@@ -47,12 +47,12 @@
 	    <view class="gc-footer">
 	      <view class="gc-icon-block gc-icon-block2">
           <view
-            class="gc-icon icon-close-icon"
+            class="gc-icon gc-icon-close-icon"
             :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
             @click="handler.closeEvent"
           ></view>
           <view
-            class="gc-icon icon-refresh-icon"
+            class="gc-icon gc-icon-refresh-icon"
             :style="{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}"
             @click="handler.refreshEvent"
           ></view>

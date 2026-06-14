@@ -47,12 +47,12 @@
     <view class="gc-footer">
       <view class="gc-icon-block gc-icon-block2">
         <view
-            class="gc-icon icon-close-icon"
+            class="gc-icon gc-icon-close-icon"
             :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="closeEvent"
         ></view>
         <view
-            class="gc-icon icon-refresh-icon"
+            class="gc-icon gc-icon-refresh-icon"
             :style="[{fontSize: localConfig.iconSize + 'px', color: localTheme.iconColor}]"
             @click="refreshEvent"
         ></view>

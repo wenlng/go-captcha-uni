@@ -10,14 +10,13 @@
   font-display: block;
 }
 
-.icon-arrows-icon,
-.icon-btn-default-icon,
-.icon-btn-default-icon,
-.icon-btn-error-icon,
-.icon-btn-success-icon,
-.icon-btn-warn-icon,
-.icon-close-icon,
-.icon-refresh-icon
+.gc-icon-arrows-icon,
+.gc-icon-btn-default-icon,
+.gc-icon-btn-error-icon,
+.gc-icon-btn-success-icon,
+.gc-icon-btn-warn-icon,
+.gc-icon-close-icon,
+.gc-icon-refresh-icon
 {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'gocaptcha' !important;
@@ -33,33 +32,33 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-arrows-icon:before {
+.gc-icon-arrows-icon:before {
   content: "\e900";
 }
-.icon-btn-default-icon .path1:before {
+.gc-icon-btn-default-icon .path1:before {
   content: "\e901";
   color: rgb(62, 124, 255);
 }
-.icon-btn-default-icon .path2:before {
+.gc-icon-btn-default-icon .path2:before {
   content: "\e902";
   margin-left: -1em;
   color: rgb(255, 255, 255);
 }
-.icon-btn-error-icon:before {
+.gc-icon-btn-error-icon:before {
   content: "\e903";
   color: #ed4630;
 }
-.icon-btn-success-icon:before {
+.gc-icon-btn-success-icon:before {
   content: "\e904";
   color: #5eaa2f;
 }
-.icon-btn-warn-icon:before {
+.gc-icon-btn-warn-icon:before {
   content: "\e905";
   color: #ffa000;
 }
-.icon-close-icon:before {
+.gc-icon-close-icon:before {
   content: "\e906";
 }
-.icon-refresh-icon:before {
+.gc-icon-refresh-icon:before {
   content: "\e907";
 }
