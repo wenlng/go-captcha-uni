@@ -50,7 +50,10 @@
     <view class="gc-footer">
       <view class="gc-drag-slide-bar"
         :id="`gc-slide-drag-bar-${ukey}`"
+        @touchstart.stop.prevent="handler.dragStart"
         @touchmove.stop.prevent="handler.dragMove"
+        @touchend="handler.dragEnd"
+        @touchcancel="handler.dragEnd"
         @mousemove.stop.prevent="handler.mouseMove"
         @mouseleave="handler.mouseLeave"
       >
